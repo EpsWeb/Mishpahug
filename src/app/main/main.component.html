@@ -1,0 +1,45 @@
+<div class="background-violet">
+  <div class="menu">
+    <i class="fas fa-bars" (click)="toogleMenuVisible()"></i>
+  </div>
+  <div class="loginRegistrationWrapper">
+    <a (click)="openLogin()"
+       class="login">
+      <i class="fas fa-lock"></i> Login
+    </a>
+    <a (click)="openRegistration()" class="create">
+      <i class="fas fa-user-circle"></i> Create Account
+    </a>
+  </div>
+</div>
+<div class="container-fluid">
+  
+  <max-menu *ngIf="isMenuVisible"></max-menu>
+  <!--<max-welcome></max-welcome>-->
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Forms Login and Registration -->
+
+<max-login *ngIf="isLoginVisible" (cancel)="closeLogin()" (registrationFromLogin)="registrationFromLogin()"></max-login>
+<max-registration *ngIf="isRegistrationVisible" (cancel)="closeRegistration()" (loginFromRegistration)="loginFromRegistration()"></max-registration>
+
+<!-- /Forms Login and Registration -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

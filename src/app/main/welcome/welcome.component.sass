@@ -1,0 +1,115 @@
+@import '../../../assets/sass/vars'
+
+.welcome
+  display: flex
+  justify-content: center
+  align-items: center
+  height: calc(100vh - 3.625rem)
+  min-height: 700px
+  &__inner
+    background-image: url(../../../assets/Pictures/ShabbatEvent.jpg)
+    background-size: cover
+    color: white
+    padding: 1rem 2rem 8rem 2rem
+  &__logo
+    height: 7rem
+    &__wrapper
+      text-align: center
+  &__title
+    font-size: 3.5rem
+  &__text
+    font-size: 1.25rem
+    max-width: 45rem
+    line-height: 2.2
+    font-weight: 500
+  &__button
+    text-align: center
+    margin-top: 5rem
+  &__content
+    position: relative
+  &__overlay
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    background-color: rgba($indigo, 0.35)
+
+/*==========  Desktop First  ==========*/
+
+// ≥1200px
++media-breakpoint-down(lg)
+
+// ≥992px
++media-breakpoint-down(md)
+
+// ≥768px
++media-breakpoint-down(sm)
+  .welcome
+    &__inner
+    &__logo
+      height: 6rem
+      &__wrapper
+    &__title
+      font-size: 2.2rem
+      line-height: 1.1
+    &__text
+      line-height: 1.5
+    &__button
+      margin-top: 3rem
+    &__content
+    &__overlay
+
+// ≥576px
++media-breakpoint-down(xs)
+
+
+/*==========  Mobile First  ==========*/
+
+// ≤576px
++media-breakpoint-up(sm)
+
+// ≤768px
++media-breakpoint-up(md)
+
+// ≤992px
++media-breakpoint-up(lg)
+
+// ≤1200px
++media-breakpoint-up(xl)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+<div class="form-popup" id="loginForm">
+  <div class="bgPic2-logo"></div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="form-container">
+    <div class="alert alert-{{message.type}}" *ngIf="message.text">{{ message.text }}</div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label"><i class="far fa-envelope"></i></label>
+      <div class="col-sm-10">
+        <input formControlName="email" id="email" type="text" class="form-control" id="staticEmail" placeholder="email@example.com">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label"><i class="fas fa-lock"></i></label>
+      <div class="col-sm-10">
+        <input formControlName="password" id="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="repeatPassword" class="col-sm-2 col-form-label"><i class="fas fa-lock"></i></label>
+      <div class="col-sm-10">
+        <input formControlName="cofirmedPassword" id="cofirmedPassword" type="password" class="form-control" id="repeatPassword" placeholder="Repeat password">
+      </div>
+    </div>
+    <div class="login-footer">
+      <p><span class="color-black">Has already account? </span><span class="goToLogin"><a (click)="goToLogin()">Log in</a></span></p>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-5 offset-1">
+          <button type="button" class="btn btn-danger btn-cancel" (click)="cancelRegistration()">Cancel</button>
+        </div>
+        <div class="col-5 offset-1">
+          <button [disabled]="form.invalid" type="submit" class="btn btn-success">Registration</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
