@@ -1,0 +1,106 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "wfm@mail.ru",
+      "password": "12345678",
+      "name": "Администратор"
+    },
+    {
+      "email": "egegeyson@mail.ru",
+      "password": "123123123",
+      "name": "Daniel",
+      "id": 2
+    },
+    {
+      "email": "test@mail.ru",
+      "password": "testtest",
+      "name": "test",
+      "id": 3
+    }
+  ],
+  "bill": {
+    "value": 101333,
+    "currency": "RUB"
+  },
+  "categories": [
+    {
+      "name": "Дом",
+      "capacity": 15000,
+      "id": 1
+    },
+    {
+      "name": "Еда",
+      "capacity": 10000,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Машина",
+      "capacity": 7000
+    },
+    {
+      "name": "Шлюхи Дорогие",
+      "capacity": 5000,
+      "id": 4
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "type": "income",
+      "amount": 1250,
+      "category": 2,
+      "date": "12.09.2018 19:49:02",
+      "description": "Подарили еду в гостях"
+    },
+    {
+      "id": 2,
+      "type": "outcome",
+      "amount": 1300,
+      "category": 1,
+      "date": "13.09.2018 19:49:02",
+      "description": "Купил посудомоечную машину"
+    },
+    {
+      "type": "income",
+      "amount": 1480,
+      "category": 2,
+      "date": "17.09.2018 14:00:48",
+      "id": 3,
+      "description": "Поход в окей с баллами. Бесплатная еда"
+    },
+    {
+      "type": "outcome",
+      "amount": 7470,
+      "category": 2,
+      "date": "17.09.2018 14:00:58",
+      "id": 4,
+      "description": "Закупка на неделю"
+    },
+    {
+      "type": "outcome",
+      "amount": 7000,
+      "category": 3,
+      "date": "24.09.2018 14:01:58",
+      "id": 5,
+      "description": "Заправка + проход ТО"
+    },
+    {
+      "type": "income",
+      "amount": 4333,
+      "category": 4,
+      "date": "30.09.2018 00:30:10",
+      "description": "Сюзанна",
+      "id": 6
+    },
+    {
+      "type": "outcome",
+      "amount": 3000,
+      "category": 4,
+      "date": "30.09.2018 14:01:52",
+      "description": "Лолита",
+      "id": 7
+    }
+  ]
+}
