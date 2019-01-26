@@ -2,26 +2,52 @@
   <div class="bgPic2-logo"></div>
   <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="form-container">
     <div class="alert alert-{{message.type}}" *ngIf="message.text">{{ message.text }}</div>
+
     <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label"><i class="far fa-envelope"></i></label>
+      <label for="staticEmail" class="col-sm-2 col-form-label"><mat-icon>email</mat-icon></label>
       <div class="col-sm-10">
-        <input formControlName="email" id="email" type="text" class="form-control" id="staticEmail" placeholder="email@example.com">
+        <mat-form-field>
+          <input matInput formControlName="email" id="email" type="text" id="staticEmail"
+                 placeholder="Email *">
+          <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
+            <span *ngIf="form.get('email').errors['email']">Put correct email</span>
+            <span *ngIf="form.get('email').errors['required']">Put email</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label"><mat-icon>lock</mat-icon></label>
+      <div class="col-sm-10">
+        <mat-form-field>
+          <input matInput formControlName="password" id="password" type="password" id="inputPassword"
+                 placeholder="Password *">
+          <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
+              <span *ngIf="form.get('password').errors['minlength']">Password must contains minimum 6 letters.
+              Now {{ form.get('password').errors['minlength']['actualLength'] }}</span>
+            <span *ngIf="form.get('password').errors['required']">Put password</span>
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputPassword" class="col-sm-2 col-form-label"><i class="fas fa-lock"></i></label>
+      <label for="repeatPassword" class="col-sm-2 col-form-label"><mat-icon>lock</mat-icon></label>
       <div class="col-sm-10">
-        <input formControlName="password" id="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="repeatPassword" class="col-sm-2 col-form-label"><i class="fas fa-lock"></i></label>
-      <div class="col-sm-10">
-        <input formControlName="cofirmedPassword" id="cofirmedPassword" type="password" class="form-control" id="repeatPassword" placeholder="Repeat password">
+        <mat-form-field>
+          <input matInput formControlName="cofirmedPassword" id="cofirmedPassword" type="password"
+                 id="repeatPassword" placeholder="Repeat password *">
+          <mat-error *ngIf="form.get('cofirmedPassword').invalid && form.get('cofirmedPassword').touched">
+              <span *ngIf="form.get('cofirmedPassword').errors['minlength']">Confirmed Password must contains minimum 6 letters.
+              Now {{ form.get('cofirmedPassword').errors['minlength']['actualLength'] }}</span>
+            <span *ngIf="form.get('cofirmedPassword').errors['required']">Put confirmed password</span>
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
     <div class="login-footer">
-      <p><span class="color-black">Has already account? </span><span class="goToLogin"><a (click)="goToLogin()">Log in</a></span></p>
+      <p><span class="color-black">Has already account? </span><span class="goToLogin"><a
+        (click)="goToLogin()">Log in</a></span></p>
     </div>
     <div class="container">
       <div class="row">
@@ -29,7 +55,7 @@
           <button type="button" class="btn btn-danger btn-cancel" (click)="cancelRegistration()">Cancel</button>
         </div>
         <div class="col-5 offset-1">
-          <button [disabled]="form.invalid" type="submit" class="btn btn-success">Registration</button>
+          <button type="submit" class="btn btn-success">Registration</button>
         </div>
       </div>
     </div>

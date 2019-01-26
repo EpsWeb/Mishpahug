@@ -1,95 +1,161 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-3 offset-lg-2 col-11 offset-1">
+  <div class="row fill-profile__header">
+    <div class="col-lg-3 offset-lg-2 col-10 offset-1">
       <img src="../../../assets/icons/Group_258.png" alt="">
-      <div class="headerPersonal">
-        <h3>Personal</h3>
-        <p>information</p>
-      </div>
-      <form class="formPersonal">
-        <div class="form-group">
-          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name*">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name*">
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number*">
-        </div>
-        <div class="form-group">
-          <select id="confession" class="form-control" name="confession">
-            <option hidden [value]="" selected>Confession*</option>
-            <option value="religious">Religious</option>
-            <option value="irreligious">Irreligious</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Date of Birth*">
-        </div>
-      </form>
     </div>
-    <div class="col-lg-3 offset-lg-0 col-11 offset-1 about">
+    <div class="col-lg-3 col-10 offset-1 registration">
       <h1>Registration</h1>
-      <div class="headerAbout">
-        <h3>About</h3>
-        <p>myself</p>
-      </div>
-      <div class="form-group">
-        <select id="marritalStatus" class="form-control" name="marritalStatus">
-          <option hidden [value]="" selected>Marrital Status*</option>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
-          <option value="divorced">Divorced</option>
-          <option value="inACivilUnion">In a civil union</option>
-          <option value="inARelationship">In a relationship</option>
-          <option value="widowed">Widowed</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <div class="input-group-text">
-          <input type="checkbox" class="form-check-inline" name="kosher" value="kosher">Kosher
-          <input type="checkbox" class="form-check-inline" name="vegetarian" value="vegetarian">Vegetarian
-          <input type="checkbox" class="form-check-inline" name="any" value="any">Any
-        </div>
-      </div>
-      <div class="form-group">
-        <select id="gender" class="form-control" name="gender">
-          <option hidden [value]="" selected>Gender*</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <div class="input-group-text">
-          <input type="checkbox" class="form-check-inline" name="hebrew" value="hebrew">Hebrew
-          <input type="checkbox" class="form-check-inline" name="english" value="english">Engl
-          <input type="checkbox" class="form-check-inline" name="french" value="french">French
-          <input type="checkbox" class="form-check-inline" name="russian" value="russian">Russ
-          <input type="checkbox" class="form-check-inline" name="spain" value="spain">Spain
-        </div>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" id="aboutMyself" name="aboutMyself"
-               placeholder="Write few words about yourself*">
-      </div>
-      <div class="buttons">
-        <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-        <button type="button" class="btn btn-danger btn-cancel">Save</button>
-      </div>
-    </div>
-    <div class="col-lg-3 offset-lg-0 col-11 offset-1 photos">
-      <div class="avatar-wrapper">
-        <input class="photo avatar" type="image" src="../../../assets/icons/no%20avatar%20(boy).png" width="150"
-               alt="avatar">
-      </div>
-      <div class="banner-wrapper">
-        <input class="photo banner" type="image" src="../../../assets/icons/banner.png" width="200" alt="banner">
-      </div>
     </div>
   </div>
-</div>
 
-<mat-checkbox>Check me!</mat-checkbox>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+    <div class="row fill-profile__content">
+
+      <div class="fill-profile__content__form col-lg-6 offset-lg-2 col-10 offset-1">
+        <div class="row">
+
+          <div class="col-lg-6 col-12 fill-profile__content__form__personal mt-lg-2 mt-4">
+
+            <div class="fill-profile__personal__header">
+              <h3>Personal</h3>
+              <p>information</p>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput type="text" id="firstName" formControlName="firstName" placeholder="First Name *">
+                <mat-error *ngIf="form.get('firstName').invalid && form.get('firstName').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput type="text" id="lastName" formControlName="lastName" placeholder="Last Name *">
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput type="number" id="phoneNumber" formControlName="phoneNumber"
+                       placeholder="Phone Number *">
+                <mat-error *ngIf="form.get('phoneNumber').invalid && form.get('phoneNumber').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <mat-select placeholder="Confession *" formControlName="confession">
+                  <mat-option *ngFor="let confession of confessions" [value]="confession">
+                    {{confession}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('confession').invalid && form.get('confession').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date *" formControlName="birthDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="form.get('birthDate').invalid && form.get('birthDate').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div class="col-lg-6 col-12 fill-profile__content__form__about mt-lg-2 mt-4">
+
+            <div class="fill-profile__personal__about">
+              <h3>About</h3>
+              <p>myself</p>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <mat-select placeholder="Marital Status *" formControlName="marritalStatus">
+                  <mat-option *ngFor="let marritalStatus of marritalStatuses" [value]="marritalStatus">
+                    {{marritalStatus}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('marritalStatus').invalid && form.get('marritalStatus').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <mat-select placeholder="Food Preferences *" formControlName="foodPreference" multiple>
+                  <mat-option *ngFor="let foodPreference of foodPreferences" [value]="foodPreference">{{foodPreference}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('foodPreference').invalid && form.get('foodPreference').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <mat-select formControlName="gender" placeholder="Gender *">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">
+                    {{gender}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('gender').invalid && form.get('gender').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <mat-select placeholder="Languages *" formControlName="languages" multiple>
+                  <mat-option *ngFor="let language of languages" [value]="language">{{language}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('languages').invalid && form.get('languages').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <textarea matInput placeholder="Write few words about yourself *"
+                          formControlName="aboutMySelf"></textarea>
+                <mat-error *ngIf="form.get('aboutMySelf').invalid && form.get('aboutMySelf').touched">
+                  This field is mandatory
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="buttons">
+              <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+              <button [disabled]="form.invalid" type="submit" class="btn btn-danger btn-cancel">Save</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="fill-profile__content__photos col-lg-3 offset-lg-0 col-10 offset-1 mt-lg-2 mt-4">
+
+        <div class="avatar-wrapper">
+          <input class="photo avatar" type="image" src="../../../assets/icons/no%20avatar%20(boy).png" width="150"
+                 alt="avatar">
+          <h4>Change avatar</h4>
+        </div>
+        <div class="banner-wrapper">
+          <input class="photo banner" type="image" src="../../../assets/icons/banner.png" width="200" alt="banner">
+          <h4>Change banner</h4>
+        </div>
+
+      </div>
+
+
+    </div>
+  </form>
+</div>
 
 <!--<input type="file" name="avatar">-->
 

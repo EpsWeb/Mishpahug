@@ -9,7 +9,9 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import { MenuComponent } from './menu/menu.component';
 import { FillProfileComponent } from './fill-profile/fill-profile.component';
 import {SharedModule} from './shared/shared.module';
-import {MAT_CHECKBOX_CLICK_ACTION} from '@angular/material';
+import {ErrorStateMatcher, MAT_CHECKBOX_CLICK_ACTION, ShowOnDirtyErrorStateMatcher} from '@angular/material';
+import {TestComponent} from './test/test.component';
+import {MaterialModule} from './shared/material.module';
 
 @NgModule({
   declarations: [
@@ -18,17 +20,20 @@ import {MAT_CHECKBOX_CLICK_ACTION} from '@angular/material';
     RegistrationComponent,
     WelcomeComponent,
     MenuComponent,
-    FillProfileComponent
+    FillProfileComponent,
+    TestComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     MainRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ],
   providers: [
-    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ]
 })
 export class MainModule {
