@@ -19,4 +19,9 @@ export class UserService extends BaseApi {
   registrateNewUser(user: User): Observable<any> {
     return this.post('users', user);
   }
+
+  fillProfile(user: User): Observable<User> {
+    return this.put(`users/${user.id}`, user);
+  }
+
 }

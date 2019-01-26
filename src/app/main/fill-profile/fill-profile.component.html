@@ -121,7 +121,7 @@
             <div class="example-container">
               <mat-form-field>
                 <textarea matInput placeholder="Write few words about yourself *"
-                          formControlName="aboutMySelf"></textarea>
+                          formControlName="aboutMySelf" maxlength="300"></textarea>
                 <mat-error *ngIf="form.get('aboutMySelf').invalid && form.get('aboutMySelf').touched">
                   This field is mandatory
                 </mat-error>
@@ -130,7 +130,7 @@
 
             <div class="buttons">
               <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-              <button [disabled]="form.invalid" type="submit" class="btn btn-danger btn-cancel">Save</button>
+              <button type="submit" class="btn btn-danger btn-cancel">Save</button>
             </div>
 
           </div>

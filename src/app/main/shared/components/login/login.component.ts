@@ -4,6 +4,7 @@ import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {Message} from '../../models/message.model';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'max-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   @Output() cancel = new EventEmitter<any>();
   @Output() registrationFromLogin = new EventEmitter<any>();
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private authService: AuthService) {
   }
 
   form: FormGroup;
@@ -54,6 +55,8 @@ export class LoginComponent implements OnInit {
         } else {
           if (user.password === password) {
             this.cancelLogin();
+            this.authService.login();
+            window.localStorage.setItem('user', JSON.stringify(user));
             this.router.navigate(['fill-profile']);
             console.log(user);
           } else {
