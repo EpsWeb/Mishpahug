@@ -1,0 +1,20 @@
+<mat-card class="card">
+  <div class="card__img">
+    <img mat-card-image src="../../../../assets/Pictures/pexels-photo-173666.jpeg" alt="Photo of a Shiba Inu">
+    <div class="card__img__subscr">
+      <span>{{ event.owner.firstName + ' ' + event.owner.lastName }}<br>
+      <bar-rating [theme]="'stars'" name="rating" [rate]="event.owner.rate" max="5" required></bar-rating>
+      </span>
+    </div>
+  </div>
+  <mat-card-content>
+    <p>({{ event.owner.numberOfVotes }} votes)</p>
+    <p>{{ event.address.city }}</p>
+    <p>Holiday: {{ event.holiday }}</p>
+    <p>{{ event.dateFrom }}</p>
+    <p>Duration: 1d 22h 9min</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>More</button>
+  </mat-card-actions>
+</mat-card>

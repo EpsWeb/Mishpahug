@@ -1,7 +1,9 @@
 <div class="background-violet">
+  <!--<div class="menu" *ngIf="isAuth">-->
   <div class="menu">
     <i class="fas fa-bars" (click)="toogleMenuVisible()"></i>
   </div>
+  <!--<div class="loginRegistrationWrapper" *ngIf="!isAuth">-->
   <div class="loginRegistrationWrapper">
     <a (click)="openLogin()"
        class="login">
@@ -21,7 +23,7 @@
 
 <!-- Forms Login and Registration -->
 
-<max-login *ngIf="isLoginVisible" (cancel)="closeLogin()" (registrationFromLogin)="registrationFromLogin()"></max-login>
+<max-login *ngIf="isLoginVisible" (cancel)="closeLogin()" (registrationFromLogin)="registrationFromLogin()" (login)="auth()"></max-login>
 <max-registration *ngIf="isRegistrationVisible" (cancel)="closeRegistration()" (loginFromRegistration)="loginFromRegistration()"></max-registration>
 
 <!-- /Forms Login and Registration -->

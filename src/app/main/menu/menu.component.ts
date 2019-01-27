@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'max-menu',
@@ -8,13 +9,17 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   logOut() {
     this.authService.logout();
+  }
+
+  goToEvents() {
+    this.router.navigate(['events']);
   }
 
 }

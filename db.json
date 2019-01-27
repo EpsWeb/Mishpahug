@@ -1,38 +1,38 @@
 {
   "users": [
     {
-      "id": 1,
       "email": "wfm@mail.ru",
       "password": "12345678",
-      "firstName": "Иван",
-      "lastName": "Пупкин",
-      "phoneNumber": "053123123",
-      "dateOfBirth": "12.09.2018",
-      "maritalStatus": "Divorced",
-      "gender": "male",
-      "confession": "religious",
-      "languages": [
-        "Russian",
-        "English"
+      "firstName": "Peter",
+      "lastName": "Parker",
+      "phoneNumber": 123,
+      "dateOfBirth": "2019-01-15T22:00:00.000Z",
+      "maritalStatus": "Married",
+      "gender": "Male",
+      "confession": "irreligious",
+      "language": [
+        "English",
+        "French"
       ],
       "foodPreferences": [
         "Kosher",
-        "Vegetarian"
+        "Vegeterian"
       ],
-      "description": "I am cool guy",
+      "description": "we3xwxwc",
       "pictureLink": [
         "path1",
         "path2"
       ],
       "banner": "pathBanner",
-      "rate": 8.3,
-      "numberOfVotes": 25
+      "rate": 3.4,
+      "numberOfVotes": 25,
+      "id": 1
     },
     {
       "email": "test@mail",
       "password": "123123",
-      "firstName": "Peter",
-      "lastName": "Parker",
+      "firstName": "Adam",
+      "lastName": "Smith",
       "phoneNumber": 213,
       "dateOfBirth": "2019-01-09T22:00:00.000Z",
       "maritalStatus": "Married",
@@ -48,8 +48,8 @@
       "description": "fvdsv",
       "pictureLink": [],
       "banner": "",
-      "rate": 0,
-      "numberOfVotes": 0,
+      "rate": 4,
+      "numberOfVotes": 12,
       "id": 2
     }
   ],
@@ -57,15 +57,201 @@
     {
       "id": 1,
       "title": "Welcome",
-      "holiday": "Pesah",
-      "address": "Bar Kochva, 209",
+      "holiday": "Pesach",
+      "address": {
+        "city": "Tel Aviv-Yafo"
+      },
       "confession": "religious",
       "dateFrom": "12.04.2019 19:00:00",
       "dateTo": "12.04.2019 23:00:00",
       "food": [
         "Kosher"
       ],
-      "description": "We will eat and drink"
+      "description": "We will eat and drink",
+      "owner": {
+        "email": "test@mail",
+        "password": "123123",
+        "firstName": "Adam",
+        "lastName": "Smith",
+        "phoneNumber": 213,
+        "dateOfBirth": "2019-01-09T22:00:00.000Z",
+        "maritalStatus": "Married",
+        "gender": "Male",
+        "confession": "religious",
+        "language": [
+          "Hebrew",
+          "English"
+        ],
+        "foodPreferences": [
+          "Vegeterian"
+        ],
+        "description": "fvdsv",
+        "pictureLink": [],
+        "banner": "",
+        "rate": 4,
+        "numberOfVotes": 12,
+        "id": 2
+      }
+    },
+    {
+      "id": 2,
+      "title": "Hi",
+      "holiday": "Shabat",
+      "address": {
+        "city": "Tel Aviv-Yafo"
+      },
+      "confession": "irreligious",
+      "dateFrom": "12.05.2019 19:00:00",
+      "dateTo": "12.05.2019 23:00:00",
+      "food": [
+        "Any"
+      ],
+      "description": "A little party  never killed nobody",
+      "owner": {
+        "email": "wfm@mail.ru",
+        "password": "12345678",
+        "firstName": "Peter",
+        "lastName": "Parker",
+        "phoneNumber": 123,
+        "dateOfBirth": "2019-01-15T22:00:00.000Z",
+        "maritalStatus": "Married",
+        "gender": "Male",
+        "confession": "irreligious",
+        "language": [
+          "English",
+          "French"
+        ],
+        "foodPreferences": [
+          "Kosher",
+          "Vegeterian"
+        ],
+        "description": "we3xwxwc",
+        "pictureLink": [
+          "path1",
+          "path2"
+        ],
+        "banner": "pathBanner",
+        "rate": 3.4,
+        "numberOfVotes": 25,
+        "id": 1
+      }
+    },
+    {
+      "id": 3,
+      "title": "Hello",
+      "holiday": "Purim",
+      "address": {
+        "city": "Jerusalem"
+      },
+      "confession": "religious",
+      "dateFrom": "15.04.2019 10:00:00",
+      "dateTo": "15.04.2019 14:00:00",
+      "food": [
+        "Vegetarian"
+      ],
+      "description": "Party",
+      "owner": {
+        "email": "test@mail",
+        "firstName": "Adam",
+        "lastName": "Smith",
+        "lastName": "Parker",
+        "phoneNumber": 213,
+        "dateOfBirth": "2019-01-09T22:00:00.000Z",
+        "maritalStatus": "Married",
+        "gender": "Male",
+        "confession": "religious",
+        "language": [
+          "Hebrew",
+          "English"
+        ],
+        "foodPreferences": [
+          "Vegeterian"
+        ],
+        "description": "fvdsv",
+        "pictureLink": [],
+        "banner": "",
+        "rate": 4,
+        "numberOfVotes": 12,
+        "id": 2
+      }
+    },
+    {
+      "id": 4,
+      "title": "Hi, everybody",
+      "holiday": "Rosh Hashana",
+      "address": {
+        "city": "Ashqelon"
+      },
+      "confession": "religious",
+      "dateFrom": "19.04.2019 19:00:00",
+      "dateTo": "19.04.2019 23:00:00",
+      "food": [
+        "Kosher"
+      ],
+      "description": "It will be cool",
+      "owner": {
+        "email": "test@mail",
+        "password": "123123",
+        "firstName": "Adam",
+        "lastName": "Smith",
+        "phoneNumber": 213,
+        "dateOfBirth": "2019-01-09T22:00:00.000Z",
+        "maritalStatus": "Married",
+        "gender": "Male",
+        "confession": "religious",
+        "language": [
+          "Hebrew",
+          "English"
+        ],
+        "foodPreferences": [
+          "Vegeterian"
+        ],
+        "description": "fvdsv",
+        "pictureLink": [],
+        "banner": "",
+        "rate": 3.4,
+        "numberOfVotes": 25,
+        "id": 2
+      }
+    },
+    {
+      "id": 5,
+      "title": "Let's make party",
+      "holiday": "Sukkot",
+      "address": {
+        "city": "Herzliya"
+      },
+      "confession": "irreligious",
+      "dateFrom": "20.04.2019 19:00:00",
+      "dateTo": "20.04.2019 23:00:00",
+      "food": [
+        "Kosher"
+      ],
+      "description": "Come on, friends",
+      "owner": {
+        "email": "test@mail",
+        "password": "123123",
+        "firstName": "Adam",
+        "lastName": "Smith",
+        "phoneNumber": 213,
+        "dateOfBirth": "2019-01-09T22:00:00.000Z",
+        "maritalStatus": "Married",
+        "gender": "Male",
+        "confession": "religious",
+        "language": [
+          "Hebrew",
+          "English"
+        ],
+        "foodPreferences": [
+          "Vegeterian"
+        ],
+        "description": "fvdsv",
+        "pictureLink": [],
+        "banner": "",
+        "rate": 4,
+        "numberOfVotes": 12,
+        "id": 2
+      }
     }
   ]
 }

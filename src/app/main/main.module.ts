@@ -12,6 +12,8 @@ import {SharedModule} from './shared/shared.module';
 import {ErrorStateMatcher, MAT_CHECKBOX_CLICK_ACTION, ShowOnDirtyErrorStateMatcher} from '@angular/material';
 import {TestComponent} from './test/test.component';
 import {MaterialModule} from './shared/material.module';
+import { EventsPageComponent } from './events-page/events-page.component';
+import { EventCardComponent } from './events-page/event-card/event-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {MaterialModule} from './shared/material.module';
     WelcomeComponent,
     MenuComponent,
     FillProfileComponent,
-    TestComponent
+    TestComponent,
+    EventsPageComponent,
+    EventCardComponent
   ],
   imports: [
     CommonModule,

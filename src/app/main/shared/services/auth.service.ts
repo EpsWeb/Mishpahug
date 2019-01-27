@@ -1,3 +1,5 @@
+import {Promise} from 'q';
+
 export class AuthService {
   isLoggedIn = false;
   isFullFillen = false;

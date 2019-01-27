@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   @Output() cancel = new EventEmitter<any>();
   @Output() registrationFromLogin = new EventEmitter<any>();
 
+  @Output() login = new EventEmitter<any>();
+
   constructor(private router: Router, private userService: UserService, private authService: AuthService) {
   }
 
@@ -51,16 +53,17 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByEmail(email)
       .subscribe((user: User) => {
         if (!user) {
-          this.showMessage('This user is not registered', 'warning');
+          this.showMessage('Email or password is wrong', 'warning');
         } else {
           if (user.password === password) {
             this.cancelLogin();
             this.authService.login();
             window.localStorage.setItem('user', JSON.stringify(user));
+            this.login.emit();
             this.router.navigate(['fill-profile']);
             console.log(user);
           } else {
-            this.showMessage('Password is not right', 'warning');
+            this.showMessage('Email ot password is wrong', 'warning');
           }
         }
       });
