@@ -8,7 +8,7 @@ import {EventsPageComponent} from './events-page/events-page.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainComponent, children: [
+    path: 'main', component: MainComponent, children: [
       {path: 'welcome', component: WelcomeComponent},
       {path: 'fill-profile', component: FillProfileComponent},
       {path: 'test', component: TestComponent},

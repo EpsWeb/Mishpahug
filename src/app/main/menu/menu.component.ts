@@ -19,7 +19,11 @@ export class MenuComponent implements OnInit {
   }
 
   goToEvents() {
-    this.router.navigate(['events']);
+    this.router.navigate(['main/events']);
+  }
+
+  goToProfile() {
+    this.router.navigate(['main/fill-profile']);
   }
 
 }

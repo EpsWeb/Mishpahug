@@ -11,7 +11,7 @@ export class EventsService extends BaseApi {
     super(http);
   }
 
-  getAllEvents(): Observable<MishEvent> {
+  getAllEvents(): Observable<MishEvent[]> {
     return this.get('events');
   }
 

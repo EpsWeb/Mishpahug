@@ -1,9 +1,22 @@
-<div class="test">
+<!--<div class="test">-->
 
 
-  <bar-rating [theme]="'stars'" name="rating" [(ngModel)]="formRating" max="5" required></bar-rating>
+  <ol>
+    <li>
+      <mat-form-field>
+        <input matInput [(ngModel)]="name" placeholder="What's your name?">
+      </mat-form-field>
+    </li>
+    <li>
+      <button mat-raised-button (click)="openDialog()">Pick one</button>
+    </li>
+    <li *ngIf="animal">
+      You choose: <i>{{animal}}</i>
+    </li>
+  </ol>
 
-</div>
+
+<!--</div>-->
 
 
 

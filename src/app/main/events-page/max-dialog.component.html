@@ -1,0 +1,67 @@
+<div #dialog class="container dialog">
+  <div class="dialog__logo">
+    <img src="../../../assets/icons/Group_258.png" alt="">
+  </div>
+  <div class="dialog__form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+      <div class="dialog__form__header">
+        <h3>Filters</h3>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <mat-form-field>
+            <input matInput [matDatepicker]="pickerFrom" placeholder="Date from" formControlName="dateFrom">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-auto">
+          <mat-form-field>
+            <input matInput [matDatepicker]="pickerTo" placeholder="Date to" formControlName="dateTo">
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-select placeholder="Holiday" formControlName="holiday">
+              <mat-option *ngFor="let holiday of holidays" [value]="holiday">
+                {{holiday}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-select placeholder="Confession" formControlName="confession">
+              <mat-option *ngFor="let confession of confessions" [value]="confession">
+                {{confession}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <br>
+
+      <h5>Food Preferences</h5>
+        <mat-radio-group class="example-radio-group" formControlName="food">
+          <mat-radio-button class="example-radio-button" *ngFor="let food of foods" [value]="food">
+            {{food}}
+          </mat-radio-button>
+        </mat-radio-group>
+
+      <div class="dialog__form__buttons">
+        <button mat-raised-button type="button" (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button type="reset">Reset</button>
+        <button mat-raised-button type="submit" cdkFocusInitial>Ok</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+

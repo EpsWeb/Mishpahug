@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     // Navigate to welcome page if user is not authed
-    this.router.navigate(['welcome'], {relativeTo: this.route});
+    // this.router.navigate(['welcome'], {relativeTo: this.route});
     this.isAuth = this.authService.isAuthenticate();
   }
 

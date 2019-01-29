@@ -4,7 +4,7 @@
 <div class="events__filters row">
 
   <div class="col-3 col-sm-2 offset-1 offset-md-2 events__filters__global">
-    <button mat-raised-button>Filters</button>
+    <button mat-raised-button (click)="openDialog()">Filters</button>
   </div>
 
   <button mat-raised-button class="col-5 offset-8 offset-md-0 col-sm-2 events__filters__city">
@@ -22,38 +22,6 @@
     <div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let e of events">
       <max-event-card [ev]="e"></max-event-card>
     </div>
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
-
-    <!--<div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3">-->
-      <!--<max-event-card></max-event-card>-->
-    <!--</div>-->
 
   </div>
 </div>

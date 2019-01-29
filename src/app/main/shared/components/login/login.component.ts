@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             this.authService.login();
             window.localStorage.setItem('user', JSON.stringify(user));
             this.login.emit();
-            this.router.navigate(['fill-profile']);
+            this.router.navigate(['main/fill-profile']);
             console.log(user);
           } else {
             this.showMessage('Email ot password is wrong', 'warning');

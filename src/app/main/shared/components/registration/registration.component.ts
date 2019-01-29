@@ -60,7 +60,7 @@ export class RegistrationComponent implements OnInit {
           } else {
             this.userService.registrateNewUser(user)
               .subscribe((newUser: User) => {
-                this.router.navigate(['fill-profile']);
+                this.router.navigate(['main/fill-profile']);
                 this.cancelRegistration();
               });
           }

@@ -3,22 +3,21 @@
     {
       "email": "wfm@mail.ru",
       "password": "12345678",
-      "firstName": "Peter",
-      "lastName": "Parker",
-      "phoneNumber": 123,
-      "dateOfBirth": "2019-01-15T22:00:00.000Z",
+      "firstName": "dgndn",
+      "lastName": "dfndfn",
+      "phoneNumber": 235235,
+      "dateOfBirth": "",
       "maritalStatus": "Married",
-      "gender": "Male",
+      "gender": "Female",
       "confession": "irreligious",
       "language": [
-        "English",
-        "French"
+        "French",
+        "Russian"
       ],
       "foodPreferences": [
-        "Kosher",
         "Vegeterian"
       ],
-      "description": "we3xwxwc",
+      "description": "erhe",
       "pictureLink": [
         "path1",
         "path2"
@@ -51,6 +50,25 @@
       "rate": 4,
       "numberOfVotes": 12,
       "id": 2
+    },
+    {
+      "email": "333@s",
+      "password": "123123",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "dateOfBirth": "",
+      "maritalStatus": "",
+      "gender": "",
+      "confession": "",
+      "language": [],
+      "foodPreferences": [],
+      "description": "",
+      "pictureLink": [],
+      "banner": "",
+      "rate": 0,
+      "numberOfVotes": 0,
+      "id": 3
     }
   ],
   "events": [
@@ -153,7 +171,6 @@
       "owner": {
         "email": "test@mail",
         "firstName": "Adam",
-        "lastName": "Smith",
         "lastName": "Parker",
         "phoneNumber": 213,
         "dateOfBirth": "2019-01-09T22:00:00.000Z",

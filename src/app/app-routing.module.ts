@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {MainComponent} from './main/main.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'welcome', pathMatch: 'full'}
+  {path: '', redirectTo: 'main/welcome', pathMatch: 'full'}
 ];
 
 @NgModule({
