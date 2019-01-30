@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {Promise} from 'q';
 
 @Injectable()
 export class AuthGuard {
@@ -13,7 +12,7 @@ export class AuthGuard {
     if (this.authService.isAuthenticate()) {
       return true;
     } else {
-      this.router.navigate(['/login'], {
+      this.router.navigate(['/main/welcome'], {
         queryParams: {
           accessDenied: true
         }

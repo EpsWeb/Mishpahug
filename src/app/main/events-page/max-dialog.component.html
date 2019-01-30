@@ -3,7 +3,7 @@
     <img src="../../../assets/icons/Group_258.png" alt="">
   </div>
   <div class="dialog__form">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+    <form [formGroup]="form">
       <div class="dialog__form__header">
         <h3>Filters</h3>
       </div>
@@ -55,9 +55,9 @@
         </mat-radio-group>
 
       <div class="dialog__form__buttons">
-        <button mat-raised-button type="button" (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button mat-dialog-close (click)="onNoClick()">Cancel</button>
         <button mat-raised-button type="reset">Reset</button>
-        <button mat-raised-button type="submit" cdkFocusInitial>Ok</button>
+        <button mat-raised-button [mat-dialog-close]="form.value" cdkFocusInitial>Ok</button>
       </div>
 
     </form>

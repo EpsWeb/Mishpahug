@@ -3,7 +3,8 @@ import {MishEvent} from '../shared/models/event.model';
 import {EventsService} from '../shared/services/events.service';
 import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup, NgForm} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'max-events-page',
@@ -11,18 +12,32 @@ import {FormControl, FormGroup, NgForm} from '@angular/forms';
   styleUrls: ['./events-page.component.sass']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
-
   constructor(private eventsService: EventsService, public dialog: MatDialog) {
   }
 
-  cities = ['None', 'Afula', 'Akko', 'Arad', 'Ashdod', 'Ashqelon', 'Bat Yam', 'Beersheba', 'Bet Sheʾan', 'Bet Sheʿarim',
-    'Bnei Brak', 'Caesarea', 'Dimona', 'Dor', 'Elat', 'En Gedi', 'Givʿatayim', 'Hadera', 'Haifa',
+  dateFrom: string;
+  dateTo: string;
+  holiday: string;
+  confession: string;
+  food: string;
+
+  cities = ['None', 'Afula', 'Akko', 'Arad', 'Ashdod', 'Ashqelon', 'Bat-Yam', 'Beersheba', 'Bet-Sheʾan', 'Bet-Sheʿarim',
+    'Bnei-Brak', 'Caesarea', 'Dimona', 'Dor', 'Elat', 'En-Gedi', 'Givʿatayim', 'Hadera', 'Haifa',
     'Herzliya', 'Holon', 'Jerusalem', 'Karmiʾel', 'Kefar Sava', 'Lod', 'Meron', 'Nahariyya',
-    'Nazareth', 'Netanya', 'Petah Tiqwa', 'Qiryat Shemona', 'Ramat Gan', 'Ramla', 'Rehovot',
-    'Rishon LeZiyyon', 'Sedom', 'Tel Aviv–Yafo', 'Tiberias', 'Zefat'];
+    'Nazareth', 'Netanya', 'Petah-Tiqwa', 'Qiryat-Shemona', 'Ramat-Gan', 'Ramla', 'Rehovot',
+    'Rishon-LeZiyyon', 'Sedom', 'Tel-Aviv–Yafo', 'Tiberias', 'Zefat'];
 
   events: MishEvent[];
   s1: Subscription;
+  selectedCity = '';
+  selectedFood = '';
+  selectedHoliday = '';
+  selectedConfession = '';
+
+  selectedDateFromFormatForDB = '';
+  selectedDateFromFormatForPipe = '';
+  selectedDateToFormatForDB = '';
+  selectedDateToFormatForPipe = '';
 
   ngOnInit() {
     this.s1 = this.eventsService.getAllEvents()
@@ -32,10 +47,34 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-    });
+    const dialogRef = this.dialog.open(DialogComponent, {});
 
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(result);
+
+      this.selectedFood = '';
+      this.selectedHoliday = '';
+      this.selectedConfession = '';
+      this.selectedDateFromFormatForPipe = '';
+      this.selectedDateToFormatForPipe = '';
+
+      if (result) {
+
+        if (result['dateFrom']) {
+          this.selectedDateFromFormatForDB = moment(result['dateFrom']).format('DD.MM.YYYY');
+          this.selectedDateFromFormatForPipe = moment(this.selectedDateFromFormatForDB, 'DD.MM.YYYY').format('YYYY-MM-DD');
+        }
+
+        if (result['dateTo']) {
+          this.selectedDateToFormatForDB = moment(result['dateTo']).format('DD.MM.YYYY');
+          this.selectedDateToFormatForPipe = moment(this.selectedDateToFormatForDB, 'DD.MM.YYYY').format('YYYY-MM-DD');
+        }
+
+        this.selectedHoliday = result['holiday'];
+        this.selectedConfession = result['confession'];
+        this.selectedFood = result['food'];
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -43,7 +82,6 @@ export class EventsPageComponent implements OnInit, OnDestroy {
       this.s1.unsubscribe();
     }
   }
-
 }
 
 @Component({
@@ -54,13 +92,10 @@ export class EventsPageComponent implements OnInit, OnDestroy {
 export class DialogComponent implements OnInit {
   @ViewChild('dialog') dialog: ElementRef;
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
+  constructor(public dialogRef: MatDialogRef<DialogComponent>) {
   }
 
-  confessions = ['Irreligious', 'Religious'];
+  confessions = ['irreligious', 'religious'];
   holidays = ['Shabat', 'Purim', 'Pesach', 'Rosh Hashana', 'Sukkot'];
   foods = ['Kosher', 'Vegetarian', 'Any'];
 
@@ -79,10 +114,6 @@ export class DialogComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  onSubmit(form: NgForm) {
-    console.log(form);
   }
 
 }

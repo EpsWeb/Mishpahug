@@ -8,7 +8,7 @@
   </div>
 
   <button mat-raised-button class="col-5 offset-8 offset-md-0 col-sm-2 events__filters__city">
-    <mat-select placeholder="Cities">
+    <mat-select placeholder="Cities" [(ngModel)]="selectedCity">
       <mat-option *ngFor="let city of cities" [value]="city">
         {{city}}
       </mat-option>
@@ -19,8 +19,8 @@
 <div class="container">
   <div class="events__cards row">
 
-    <div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let e of events">
-      <max-event-card [ev]="e"></max-event-card>
+    <div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let e of events | maxFilterCity:selectedCity | maxFilterGlobal:selectedFood:selectedConfession:selectedHoliday:selectedDateFromFormatForPipe:selectedDateToFormatForPipe">
+      <max-event-card [event]="e"></max-event-card>
     </div>
 
   </div>

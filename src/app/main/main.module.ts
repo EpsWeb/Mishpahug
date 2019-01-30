@@ -19,8 +19,10 @@ import {
 import {TestComponent} from './test/test.component';
 import {MaterialModule} from './shared/material.module';
 import {DialogComponent, EventsPageComponent} from './events-page/events-page.component';
-import {EventCardComponent} from './events-page/event-card/event-card.component';
+import {DialogDetailComponent, EventCardComponent} from './events-page/event-card/event-card.component';
 import {BackgroundDirective} from './shared/directives/background.directive';
+import {FilterCityPipe} from './shared/pipes/filter-city.pipe';
+import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,11 @@ import {BackgroundDirective} from './shared/directives/background.directive';
     TestComponent,
     EventsPageComponent,
     EventCardComponent,
+    DialogDetailComponent,
     DialogComponent,
-    BackgroundDirective
+    BackgroundDirective,
+    FilterCityPipe,
+    FilterGlobalPipe
   ],
   imports: [
     CommonModule,
@@ -52,7 +57,9 @@ import {BackgroundDirective} from './shared/directives/background.directive';
   ],
   entryComponents: [
     DialogComponent,
-    EventsPageComponent
+    EventsPageComponent,
+    EventCardComponent,
+    DialogDetailComponent
   ]
 })
 export class MainModule {

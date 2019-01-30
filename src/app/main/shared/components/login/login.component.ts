@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
           if (user.password === password) {
             this.cancelLogin();
             this.authService.login();
+            window.localStorage.clear();
             window.localStorage.setItem('user', JSON.stringify(user));
             this.login.emit();
             this.router.navigate(['main/fill-profile']);

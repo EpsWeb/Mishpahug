@@ -11,10 +11,10 @@
     <p>({{ event.owner.numberOfVotes }} votes)</p>
     <p>{{ event.address.city }}</p>
     <p>Holiday: {{ event.holiday }}</p>
-    <p>{{ event.dateFrom }}</p>
-    <p>Duration: 1d 22h 9min</p>
+    <p>{{ event.date + ' ' + event.time }}</p>
+    <p>Duration: {{ event.duration }} minutes</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>More</button>
+    <button mat-button (click)="openDetail()">More</button>
   </mat-card-actions>
 </mat-card>
