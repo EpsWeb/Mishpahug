@@ -3,9 +3,11 @@ import {MishEvent} from '../shared/models/event.model';
 import {EventsService} from '../shared/services/events.service';
 import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Message} from '../shared/models/message.model';
 
 @Component({
   selector: 'max-events-page',
@@ -13,7 +15,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./events-page.component.sass']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
-  constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router) {
+  // TODO delete pipes except of city-pipe, uncomment uploadEvents() in ngOnInit
+  constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router, private http: HttpClient) {
   }
 
   dateFrom: string;
@@ -35,12 +38,101 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   selectedHoliday = '';
   selectedConfession = '';
 
+  countEvents = 100;
+  selectedPage = '0';
+  selectedRadius = 2000;
+
   selectedDateFromFormatForDB = '';
   selectedDateFromFormatForPipe = '';
   selectedDateToFormatForDB = '';
   selectedDateToFormatForPipe = '';
 
+  lat;
+  long;
+  showMessage = false;
+
+  uploadEvents() {
+    const data = {
+      'location': {
+        'lat': this.lat,
+        'lng': this.long,
+        'radius': this.selectedRadius
+      },
+      'filters': {
+        'dateFrom': this.selectedDateFromFormatForPipe,
+        'dateTo': this.selectedDateToFormatForPipe,
+        'holidays': this.selectedHoliday,
+        'confession': this.selectedConfession,
+        'food': this.selectedFood
+      }
+    };
+
+    this.eventsService.getAllEventsProgressList(data, this.selectedPage)
+      .subscribe((res) => {
+          this.events = res['content'];
+          this.countEvents = res['totalElements'];
+        },
+        () => {
+          this.showMessage = true;
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3000);
+        });
+  }
+
+
+  getUserIP = function (onNewIP) {
+    const myPeerConnection = RTCPeerConnection || webkitRTCPeerConnection;
+    const pc = new myPeerConnection({
+        iceServers: []
+      }),
+      localIPs = {},
+      ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
+
+    // key;
+
+    function iterateIP(ip) {
+      if (!localIPs[ip]) {
+        onNewIP(ip);
+      }
+      localIPs[ip] = true;
+    }
+
+    pc.createDataChannel('');
+
+    pc.createOffer().then(function (sdp) {
+      sdp.sdp.split('\n').forEach(function (line) {
+        if (line.indexOf('candidate') < 0) {
+          return;
+        }
+        line.match(ipRegex).forEach(iterateIP);
+      });
+
+      pc.setLocalDescription(sdp);
+    }).catch(function (reason) {
+      // An error occurred, so handle the failure to connect
+    });
+
+    pc.onicecandidate = function (ice) {
+      if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) {
+        return;
+      }
+      ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
+    };
+  };
+
   ngOnInit() {
+    // this.uploadEvents();
+    this.getUserIP(() => {
+      this.http.get('http://api.ipapi.com/api/check?access_key=3f11cd082defe9e03f19b4ffc348076f')
+        .subscribe((res) => {
+          console.log(res);
+          this.lat = res['latitude'];
+          this.long = res['longitude'];
+          console.log(this.lat, this.long);
+        });
+    });
+
     this.s1 = this.eventsService.getAllEvents()
       .subscribe((events: MishEvent[]) => {
         this.events = events;
@@ -74,7 +166,26 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         this.selectedHoliday = result['holiday'];
         this.selectedConfession = result['confession'];
         this.selectedFood = result['food'];
+        this.selectedRadius = result['radius'];
       }
+
+      // const data = {
+      //   'location': {
+      //     'lat': this.lat,
+      //     'lng': this.long,
+      //     'radius': this.selectedRadius
+      //   },
+      //   'filters': {
+      //     'dateFrom': this.selectedDateFromFormatForPipe,
+      //     'dateTo': this.selectedDateToFormatForPipe,
+      //     'holidays': this.selectedHoliday,
+      //     'confession': this.selectedConfession,
+      //     'food': this.selectedFood
+      //   }
+      // };
+
+      this.uploadEvents();
+
     });
   }
 
@@ -113,7 +224,8 @@ export class DialogComponent implements OnInit {
       dateTo: new FormControl(''),
       holiday: new FormControl(''),
       confession: new FormControl(''),
-      food: new FormControl('')
+      food: new FormControl(''),
+      radius: new FormControl(2000, [Validators.required])
     });
   }
 

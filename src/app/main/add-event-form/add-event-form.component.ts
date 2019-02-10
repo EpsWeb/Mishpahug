@@ -18,6 +18,7 @@ export class AddEventFormComponent implements OnInit {
   @ViewChild('address') public address: ElementRef;
 
   form: FormGroup;
+  minDate = new Date();
 
   confessions = ['irreligious', 'religious'];
   holidays = ['Shabat', 'Purim', 'Pesach', 'Rosh Hashana', 'Sukkot'];
@@ -27,8 +28,6 @@ export class AddEventFormComponent implements OnInit {
   lng;
   placeID;
   city;
-
-  showRegistration = false;
 
   constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private router: Router, private eventsService: EventsService,
               private snackBar: MatSnackBar) {
@@ -114,7 +113,7 @@ export class AddEventFormComponent implements OnInit {
       'description': about
     };
 
-    // console.log(data);
+    console.log(data);
 
     // TODO add request, initialize snackbar
     this.eventsService.createNewEvent(data)
@@ -122,7 +121,7 @@ export class AddEventFormComponent implements OnInit {
           console.log(res);
           this.snackBar.openFromComponent(AddEventSnackComponent, {
             data: 'You created event',
-            duration: 2000,
+            duration: 3000,
           });
           this.router.navigate(['/main/events']);
         },
@@ -133,7 +132,7 @@ export class AddEventFormComponent implements OnInit {
               data: 'For adding event you should authorize',
               duration: 2000,
             });
-            this.showRegistration = true;
+            this.router.navigate(['/main/events']);
           }
 
           if (res.status === 409) {

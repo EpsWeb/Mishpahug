@@ -20,6 +20,18 @@ export class EventsService extends BaseApi {
     return this.get('events');
   }
 
+  getAllEventsProgressList(data, page: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.post('event/allprogresslist?page=' + page + '&size=12', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   createNewEvent(data: any): Observable<any> {
     // const notCodedToken = JSON.parse(localStorage.getItem('user')).email + ':' + JSON.parse(localStorage.getItem('user')).password;
 
@@ -29,8 +41,8 @@ export class EventsService extends BaseApi {
         'Authorization': <string>localStorage.getItem('token')
       })
     };
-    // return this.post('/event/creation', data)
-    return this.post('data', data, httpOptions)
+    // return this.post('/event/creation', data, httpOptions)
+    return this.post('data', data)
       .pipe(
         catchError(this.handleError)
       );

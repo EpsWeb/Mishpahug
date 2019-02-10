@@ -1,3 +1,5 @@
+@import '../../../assets/sass/vars'
+
 .events
   &__title
     color: white
@@ -9,6 +11,12 @@
     &__global
     &__city
       margin-left: 1rem
+    &__paginator
+      position: fixed
+      bottom: 1rem
+      left: 50%
+      transform: translate(-50%)
+
   &__add
     position: fixed
     right: 1rem
@@ -25,6 +33,41 @@
     &:hover
       cursor: pointer
 
+.container
+  margin-bottom: 4rem
 
 
 
+/*==========  Desktop First  ==========*/
+
+// ≥1200px
++media-breakpoint-down(lg)
+
+// ≥992px
++media-breakpoint-down(md)
+
+// ≥768px
++media-breakpoint-down(sm)
+  .events__filters__paginator
+    position: relative
+    bottom: 2rem
+    left: 50%
+    transform: translate(-50%)
+
+// ≥576px
++media-breakpoint-down(xs)
+
+
+/*==========  Mobile First  ==========*/
+
+// ≤576px
++media-breakpoint-up(sm)
+
+// ≤768px
++media-breakpoint-up(md)
+
+// ≤992px
++media-breakpoint-up(lg)
+
+// ≤1200px
++media-breakpoint-up(xl)

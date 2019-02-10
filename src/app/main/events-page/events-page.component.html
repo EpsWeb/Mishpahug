@@ -1,6 +1,7 @@
 <div class="events__title">
   <h2>Find event</h2>
 </div>
+<div class="alert alert-danger text-center col-6 offset-3 col-md-2 offset-md-5" *ngIf="showMessage">Server Error</div>
 <div class="events__filters row">
 
   <div class="col-3 col-sm-2 offset-1 offset-md-2 events__filters__global">
@@ -29,4 +30,43 @@
 <div class="events__add" (click)="goToAddEvent()">
   <span>+</span>
 </div>
+
+<mat-paginator class="events__filters__paginator"
+               [length]="countEvents"
+               pageSize="12"
+               (page)="uploadEvents()"
+>
+</mat-paginator>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

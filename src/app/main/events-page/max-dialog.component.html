@@ -43,7 +43,14 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div class="col-auto">
+          <mat-form-field>
+            <input matInput type="number" id="radius" formControlName="radius" placeholder="Radius (in meters) *">
+            <mat-error>radius field is required</mat-error>
+          </mat-form-field>
+        </div>
       </div>
+
 
       <br>
 
@@ -57,7 +64,7 @@
       <div class="dialog__form__buttons">
         <button mat-raised-button mat-dialog-close (click)="onNoClick()">Cancel</button>
         <button mat-raised-button type="reset">Reset</button>
-        <button mat-raised-button [mat-dialog-close]="form.value" cdkFocusInitial>Ok</button>
+        <button mat-raised-button [disabled]="form.invalid " [mat-dialog-close]="form.value" cdkFocusInitial>Ok</button>
       </div>
 
     </form>
