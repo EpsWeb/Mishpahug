@@ -1,8 +1,7 @@
-import {Promise} from 'q';
-
 export class AuthService {
   isLoggedIn = false;
   isFullFillen = false;
+  token = '';
 
   login() {
     this.isLoggedIn = true;
@@ -10,6 +9,7 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn = false;
+    this.isFullFillen = false;
     window.localStorage.clear();
   }
 

@@ -10,5 +10,7 @@ export class BackgroundDirective implements OnInit {
 
   ngOnInit() {
     this.element.nativeElement.firstChild.firstChild.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    this.element.nativeElement.firstChild.firstChild.firstChild.nextSibling.nextSibling.style.border = '0';
+    this.element.nativeElement.firstChild.firstChild.style.paddingLeft = '0.5rem';
   }
 }

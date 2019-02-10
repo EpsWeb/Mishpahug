@@ -1,0 +1,124 @@
+<div class="container">
+  <max-registration *ngIf="showRegistration"></max-registration>
+  <div class="row">
+    <div class="add-event col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+
+      <div class="add-event__title">
+        <h2>Add Event</h2>
+      </div>
+      <div class="add-event__content">
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+
+          <mat-form-field maxBackground class="add-event__content__input">
+            <input matInput type="text" id="title" formControlName="title" placeholder="Title *">
+            <mat-error *ngIf="form.get('title').invalid && form.get('title').touched">
+              This field is mandatory
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field maxBackground class="add-event__content__input">
+            <mat-select placeholder="Holiday *" formControlName="holiday">
+              <mat-option *ngFor="let holiday of holidays" [value]="holiday">
+                {{holiday}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field maxBackground class="add-event__content__input">
+            <input matInput type="text" id="address" formControlName="address" placeholder="Address *" autocorrect="off" autocapitalize="off" spellcheck="off" #address>
+            <mat-error *ngIf="form.get('address').invalid && form.get('address').touched">
+              This field is mandatory
+            </mat-error>
+          </mat-form-field>
+
+          <div class="add-event__content__date row">
+            <div class="col-lg-2 col-3"><span>From:</span></div>
+            <div class="col-lg-3 col-8 add-event__content__date__from">
+              <mat-form-field maxBorderZero>
+                <input matInput [matDatepicker]="pickerFrom" placeholder="" formControlName="dateFrom" readonly>
+                <mat-datepicker-toggle matPrefix [for]="pickerFrom"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-2 offset-lg-3 col-3" style="margin-bottom: 1rem"><span>Time:</span></div>
+            <div class="col-lg-2 col-8">
+              <input type="time" matInput formControlName="timeFrom">
+            </div>
+          </div>
+
+          <div class="add-event__content__date row">
+            <div class="col-lg-2 col-3"><span>To:</span></div>
+            <div class="col-lg-3 col-8 add-event__content__date__to">
+              <mat-form-field maxBorderZero>
+                <input matInput [matDatepicker]="pickerTo" placeholder="" formControlName="dateTo" readonly>
+                <mat-datepicker-toggle matPrefix [for]="pickerTo"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-2 offset-lg-3 col-3" style="margin-bottom: 1rem"><span>Time:</span></div>
+            <div class="col-lg-2 col-8">
+              <input type="time" matInput formControlName="timeTo">
+            </div>
+          </div>
+
+          <mat-form-field maxBackground class="add-event__content__input">
+            <mat-select placeholder="Confession *" formControlName="confession">
+              <mat-option *ngFor="let confession of confessions" [value]="confession">
+                {{confession}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field maxBackground class="add-event__content__input">
+            <mat-select placeholder="Type of kitchen *" formControlName="food">
+              <mat-option *ngFor="let food of foods" [value]="food">
+                {{food}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field maxBackground class="add-event__content__input">
+                <textarea matInput placeholder="Write few words about event *"
+                          formControlName="about" maxlength="300"></textarea>
+            <mat-error *ngIf="form.get('about').invalid && form.get('about').touched">
+              This field is mandatory
+            </mat-error>
+          </mat-form-field>
+
+          <button type="button" mat-raised-button routerLink="/main/events">Cancel</button>
+          <button type="submit" mat-raised-button cdkFocusInitial>Save</button>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -119,7 +119,7 @@
               </mat-form-field>
             </div>
             <div class="example-container">
-              <mat-form-field maxBackground>
+              <mat-form-field maxBackground #aaa>
                 <textarea matInput placeholder="Write few words about yourself *"
                           formControlName="aboutMySelf" maxlength="300"></textarea>
                 <mat-error *ngIf="form.get('aboutMySelf').invalid && form.get('aboutMySelf').touched">
@@ -155,6 +155,7 @@
 
     </div>
   </form>
+  <p class="fill-profile__error" *ngIf="showError">Please full your profile at first</p>
 </div>
 
 <!--<input type="file" name="avatar">-->

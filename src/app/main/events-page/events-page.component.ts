@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {FormControl, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'max-events-page',
@@ -12,7 +13,7 @@ import * as moment from 'moment';
   styleUrls: ['./events-page.component.sass']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
-  constructor(private eventsService: EventsService, public dialog: MatDialog) {
+  constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router) {
   }
 
   dateFrom: string;
@@ -75,6 +76,10 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         this.selectedFood = result['food'];
       }
     });
+  }
+
+  goToAddEvent() {
+    this.router.navigate(['/main/add-event']);
   }
 
   ngOnDestroy() {

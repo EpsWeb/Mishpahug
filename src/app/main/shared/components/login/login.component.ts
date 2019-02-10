@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    // console.log(form);
     const {email, password} = form.value;
     this.userService.getUserByEmail(email)
       .subscribe((user: User) => {
@@ -60,6 +61,10 @@ export class LoginComponent implements OnInit {
             this.authService.login();
             window.localStorage.clear();
             window.localStorage.setItem('user', JSON.stringify(user));
+            window.localStorage.setItem('token', btoa(user.email + ':' + user.password));
+            if (JSON.parse(localStorage.getItem('user')).firstName) {
+              this.authService.fillFullProfile();
+            }
             this.login.emit();
             this.router.navigate(['main/fill-profile']);
             console.log(user);
@@ -67,6 +72,8 @@ export class LoginComponent implements OnInit {
             this.showMessage('Email ot password is wrong', 'warning');
           }
         }
+        console.log('isFilledFullProfile', this.authService.isFilledFullProfile());
+        console.log('isAuthenticate', this.authService.isAuthenticate());
       });
   }
 

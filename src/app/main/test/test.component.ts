@@ -1,79 +1,86 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup, NgForm} from '@angular/forms';
+/// <reference types='@types/googlemaps' />
 
-// export interface DialogData {
-//   animal: string;
-//   name: string;
-// }
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AgmCoreModule, MapsAPILoader} from '@agm/core';
+import {ancestorWhere} from 'tslint';
+import {FormControl, FormGroup} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'max-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.sass']
 })
-export class TestComponent {
+export class TestComponent implements OnInit {
+  constructor(private http: HttpClient) {
+  }
 
-  // animal: string;
-  // name: string;
+  form: FormGroup;
+  lat;
+  long;
 
-  // constructor(public dialog: MatDialog) {
-  // }
-  //
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(DialogComponent, {
-  //     // width: '100%',
-  //     // data: {name: this.name, animal: this.animal}
-  //   });
-  //
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     // this.animal = result;
-  //   });
-  // }
+  getUserIP = function (onNewIP) {
+    const myPeerConnection = RTCPeerConnection || webkitRTCPeerConnection;
+    const pc = new myPeerConnection({
+        iceServers: []
+      }),
+      localIPs = {},
+      ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
 
+    // key;
+
+    function iterateIP(ip) {
+      if (!localIPs[ip]) {
+        onNewIP(ip);
+      }
+      localIPs[ip] = true;
+    }
+
+    pc.createDataChannel('');
+
+    pc.createOffer().then(function (sdp) {
+      sdp.sdp.split('\n').forEach(function (line) {
+        if (line.indexOf('candidate') < 0) {
+          return;
+        }
+        line.match(ipRegex).forEach(iterateIP);
+      });
+
+      pc.setLocalDescription(sdp);
+    }).catch(function (reason) {
+      // An error occurred, so handle the failure to connect
+    });
+
+    pc.onicecandidate = function (ice) {
+      if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) {
+        return;
+      }
+      ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
+    };
+  };
+
+  ngOnInit() {
+    let myIP = '';
+    this.getUserIP((ip) => {
+      console.log(ip);
+      myIP = ip;
+      console.log(myIP);
+      this.http.get('http://api.ipapi.com/api/check?access_key=3f11cd082defe9e03f19b4ffc348076f')
+        .subscribe((res) => {
+          console.log(res);
+          this.lat = res.latitude;
+          this.long = res.longitude;
+          console.log(this.lat, this.long);
+        });
+    });
+    console.log(this.lat, this.long);
+  }
+
+  smbt() {
+    console.log(this.lat, this.long);
+  }
 }
-
-// @Component({
-//   selector: 'max-dialog',
-//   templateUrl: 'max-dialog.component.html',
-//   styleUrls: ['max-dialog.component.sass']
-// })
-// export class DialogComponent implements OnInit {
-//   @ViewChild('dialog') dialog: ElementRef;
-//
-//   constructor(
-//     public dialogRef: MatDialogRef<DialogComponent>,
-//     // @Inject(MAT_DIALOG_DATA) public data: DialogData
-//   ) {
-//   }
-//
-//   confessions = ['Irreligious', 'Religious'];
-//   holidays = ['Shabat', 'Purim', 'Pesach', 'Rosh Hashana', 'Sukkot'];
-//   foods = ['Kosher', 'Vegetarian', 'Any'];
-//
-//   form: FormGroup;
-//
-//   ngOnInit() {
-//     this.dialog.nativeElement.parentElement.parentElement.style.border = '6px solid #5F4F8D';
-//     this.form = new FormGroup({
-//       dateFrom: new FormControl(''),
-//       dateTo: new FormControl(''),
-//       holiday: new FormControl(''),
-//       confession: new FormControl(''),
-//       food: new FormControl('')
-//     });
-//   }
-//
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-//
-//   onSubmit(form: NgForm) {
-//     console.log(form);
-//   }
-//
-// }
 
 
 

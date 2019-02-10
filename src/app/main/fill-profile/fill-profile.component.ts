@@ -3,6 +3,7 @@ import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {User} from '../shared/models/user.model';
 import {AuthService} from '../shared/services/auth.service';
 import {UserService} from '../shared/services/user.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'max-fill-profile',
@@ -11,18 +12,29 @@ import {UserService} from '../shared/services/user.service';
 })
 export class FillProfileComponent implements OnInit {
 
-  constructor(private authService: AuthService, private userServise: UserService) {
+  constructor(private authService: AuthService, private userServise: UserService, private route: ActivatedRoute) {
   }
 
   confessions = ['religious', 'irreligious'];
-  marritalStatuses = ['Single', 'Married', 'Divorced', 'In a civil union', 'In a relationship', 'Widowed'];
-  foodPreferences = ['Kosher', 'Vegeterian', 'Any'];
-  genders = ['Female', 'Male'];
+  marritalStatuses = ['single', 'married', 'couple'];
+  foodPreferences = ['kosher', 'vegeterian', 'non-vegetarian'];
+  genders = ['female', 'male'];
   languages = ['Hebrew', 'English', 'French', 'Russian', 'Spain'];
 
   form: FormGroup;
 
+  showError = false;
+
   ngOnInit() {
+    this.route.queryParams
+      .subscribe((params: Params) => {
+      if (params['emptyProfile']) {
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 3500);
+      }
+    })
     this.form = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),

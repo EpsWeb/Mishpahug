@@ -1,11 +1,16 @@
 import {BaseApi} from '../core/base-api';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {MishEvent} from '../models/event.model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable()
 export class EventsService extends BaseApi {
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error);
+  }
 
   constructor(public http: HttpClient) {
     super(http);
@@ -13,6 +18,22 @@ export class EventsService extends BaseApi {
 
   getAllEvents(): Observable<MishEvent[]> {
     return this.get('events');
+  }
+
+  createNewEvent(data: any): Observable<any> {
+    // const notCodedToken = JSON.parse(localStorage.getItem('user')).email + ':' + JSON.parse(localStorage.getItem('user')).password;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    // return this.post('/event/creation', data)
+    return this.post('data', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 }

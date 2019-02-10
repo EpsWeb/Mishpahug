@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+    this.router.navigate(['main/welcome']);
   }
 
   goToEvents() {

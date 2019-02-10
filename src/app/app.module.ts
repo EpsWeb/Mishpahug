@@ -10,6 +10,7 @@ import {UserService} from './main/shared/services/user.service';
 import {AuthService} from './main/shared/services/auth.service';
 import {AuthGuard} from './main/shared/services/auth.guard';
 import {EventsService} from './main/shared/services/events.service';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,11 @@ import {EventsService} from './main/shared/services/events.service';
     MainModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI',
+      libraries: ['places']
+    })
   ],
   providers: [UserService, AuthService, AuthGuard, EventsService],
   bootstrap: [AppComponent]

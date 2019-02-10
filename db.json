@@ -3,16 +3,22 @@
     {
       "email": "wfm@mail.ru",
       "password": "12345678",
-      "firstName": "",
-      "lastName": "",
-      "phoneNumber": "",
-      "dateOfBirth": "",
-      "maritalStatus": "",
-      "gender": "",
-      "confession": "",
-      "language": "",
-      "foodPreferences": "",
-      "description": "",
+      "firstName": "wev",
+      "lastName": "242r2f",
+      "phoneNumber": 1353414,
+      "dateOfBirth": "2019-01-24T22:00:00.000Z",
+      "maritalStatus": "Married",
+      "gender": "Female",
+      "confession": "religious",
+      "language": [
+        "English",
+        "Russian"
+      ],
+      "foodPreferences": [
+        "Vegeterian",
+        "Any"
+      ],
+      "description": "wv",
       "pictureLink": [
         "path1",
         "path2"
@@ -45,6 +51,31 @@
       "rate": 4,
       "numberOfVotes": 12,
       "id": 2
+    },
+    {
+      "email": "ewfm@mail.ru",
+      "password": "123123",
+      "firstName": "dfbsb",
+      "lastName": "sfbfsb",
+      "phoneNumber": 123,
+      "dateOfBirth": "2019-02-12T22:00:00.000Z",
+      "maritalStatus": "couple",
+      "gender": "male",
+      "confession": "religious",
+      "language": [
+        "English",
+        "Russian"
+      ],
+      "foodPreferences": [
+        "kosher",
+        "vegeterian"
+      ],
+      "description": "efwwgfds",
+      "pictureLink": [],
+      "banner": "",
+      "rate": 0,
+      "numberOfVotes": 0,
+      "id": 3
     }
   ],
   "events": [
@@ -250,6 +281,162 @@
         "numberOfVotes": 12,
         "id": 2
       }
+    }
+  ],
+  "data": [
+    {
+      "title": "",
+      "holiday": "Purim",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 1
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 2
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 3
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 4
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 5
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 6
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 7
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 8
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 9
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 10
+    },
+    {
+      "title": "",
+      "holiday": "",
+      "address": {
+        "location": {}
+      },
+      "confession": "",
+      "date": "Invalid date",
+      "time": ":00",
+      "duration": null,
+      "food": "",
+      "description": "",
+      "id": 11
     }
   ]
 }

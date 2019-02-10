@@ -23,6 +23,9 @@ import {DialogDetailComponent, EventCardComponent} from './events-page/event-car
 import {BackgroundDirective} from './shared/directives/background.directive';
 import {FilterCityPipe} from './shared/pipes/filter-city.pipe';
 import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
+import {AddEventFormComponent, AddEventSnackComponent} from './add-event-form/add-event-form.component';
+import {BorderZeroDirective} from './shared/directives/borderZero.directive';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -37,9 +40,12 @@ import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
     EventCardComponent,
     DialogDetailComponent,
     DialogComponent,
-    BackgroundDirective,
     FilterCityPipe,
-    FilterGlobalPipe
+    FilterGlobalPipe,
+    AddEventFormComponent,
+    BackgroundDirective,
+    BorderZeroDirective,
+    AddEventSnackComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +54,10 @@ import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
     MainRoutingModule,
     SharedModule,
     MaterialModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI'
+    })
   ],
   providers: [
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},
@@ -59,7 +68,9 @@ import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
     DialogComponent,
     EventsPageComponent,
     EventCardComponent,
-    DialogDetailComponent
+    DialogDetailComponent,
+    AddEventFormComponent,
+    AddEventSnackComponent
   ]
 })
 export class MainModule {

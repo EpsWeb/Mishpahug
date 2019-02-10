@@ -1,56 +1,50 @@
+@import '../../../assets/sass/vars'
+
+
 .test
   position: absolute
   margin: 30px 100px
-  min-width: 1300px
-  min-height: 600px
+  //min-width: 1300px
+  //min-height: 600px
   background-color: wheat
-  //display: flex
-  //align-items: center
-  //justify-content: center
-mat-form-field
-  //display: block
-//mat-icon
-//  position: relative
-//  top: 0.3rem
-//  right: 0.3rem
-//.form-popup
-//  position: fixed
-//  top: 20%
-//  right: 35%
-//  width: 25%
-//  background-color: #5F4F8D
-//  z-index: 9
-//.bgPic2-logo
-//  background-image: url(../../../assets/icons/Group_258.png)
-//  background-position: center
-//  background-repeat: no-repeat
-//  height: 18vh
-//.form-popup .bgPic2-logo
-//  height: 15vh
-//.form-container
-//  max-width: 100%
-//  padding: 3em
-//  background-color: white
-//  height: 100%
-//.form-container label
-//  color: black
-//  font-size: 2em
-//.color-black
-//  color: black
-//.login-footer
-//  margin-top: 2em
-//.btn-cancel
-//  background-color: #5F4F8D
-//  border: none
-//.goToLogin
-//  color: blue
-//.goToLogin:hover
-//  text-decoration: underline
-//  cursor: pointer
-//mat-icon
-//  transform: scale(1.4)
+
+mat-radio-button
+  display: block
+
+button
+  display: inline
+  background-color: $indigo
+  color: white
+  font-weight: 600
+  margin-right: 0.3rem
+  text-transform: uppercase
+  margin-bottom: 1rem
+
+.dialog
+  position: relative
+  max-width: 80vw
+  max-height: 80vh
 
 
+  &__form
+    padding-top: 2.5rem
+    &__buttons, &__header
+      text-align: center
+    &__buttons
+      margin-bottom: 2rem
+  &__logo
+    position: absolute
+    top: 0
+    width: calc(100% + 48px)
+    //background-image: url(../../../assets/icons/Group_258.png)
+    //background-repeat: no-repeat
+    //background-size: contain
+    background-color: $indigo
+    padding-left: 1.5rem
+    height: 7vh
+    margin: -24px -24px 5px -39px
+    img
+      height: 100%
 
 
 
