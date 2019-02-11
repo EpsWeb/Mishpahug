@@ -1,6 +1,9 @@
 import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {MishEvent} from '../../shared/models/event.model';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {EventsService} from '../../shared/services/events.service';
+import {AddEventSnackComponent} from '../../add-event-form/add-event-form.component';
+import {Message} from '../../shared/models/message.model';
 
 @Component({
   selector: 'max-event-card',
@@ -22,10 +25,11 @@ export class EventCardComponent {
     dialogDetailRef.afterClosed().subscribe(result => {
       if (result) {
       }
-      // TODO subscribe to this event
-        console.log(result);
-      });
+      console.log(result);
+    });
   }
+
+
 }
 
 
@@ -34,20 +38,53 @@ export class EventCardComponent {
   templateUrl: 'dialog-detail.component.html',
   styleUrls: ['dialog-detail.component.sass']
 })
-export class DialogDetailComponent implements OnInit{
+export class DialogDetailComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef;
 
   constructor(
     public dialogDetailRef: MatDialogRef<DialogDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: MishEvent) {}
+    @Inject(MAT_DIALOG_DATA) public data: MishEvent,
+    private eventsService: EventsService) {
+  }
+
+  message: Message;
 
   ngOnInit() {
+    this.message = new Message('', 'danger');
     this.wrapper.nativeElement.parentElement.parentElement.style.border = '6px solid #5F4F8D';
     this.wrapper.nativeElement.parentElement.parentElement.style.padding = '0';
   }
 
+  showMessage(text, typeMessage) {
+    this.message = new Message(text, typeMessage);
+    setTimeout(() => {
+      this.message = new Message('', typeMessage);
+    }, 3000);
+  }
+
   onNoClick(): void {
     this.dialogDetailRef.close();
+  }
+
+  joinEvent(ev) {
+    if (ev) {
+      this.eventsService.subscriveToEvent(ev['eventId'])
+        .subscribe((resp) => {
+            this.showMessage('You succesfully joined to event', 'success');
+            setTimeout(() => {
+              this.dialogDetailRef.close();
+            }, 3000);
+          },
+          ((res) => {
+            if (res.status === 401 || res.status === 404) {
+              this.showMessage('For joining to event you should authorize', 'danger');
+            }
+
+            if (res.status === 409) {
+              this.showMessage('You are the owner of the event or already subscribed to it!', 'danger');
+            }
+          }));
+    }
   }
 
 }

@@ -48,4 +48,17 @@ export class EventsService extends BaseApi {
       );
   }
 
+  subscriveToEvent(eventId): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.put(`event/subscription/${eventId}`, {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 }

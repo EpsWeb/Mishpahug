@@ -130,7 +130,7 @@ export class AddEventFormComponent implements OnInit {
           if (res.status === 401 || res.status === 404) {
             this.snackBar.openFromComponent(AddEventSnackComponent, {
               data: 'For adding event you should authorize',
-              duration: 2000,
+              duration: 3000,
             });
             this.router.navigate(['/main/events']);
           }
@@ -138,7 +138,7 @@ export class AddEventFormComponent implements OnInit {
           if (res.status === 409) {
             this.snackBar.openFromComponent(AddEventSnackComponent, {
               data: 'You has already created the event on this date and time!',
-              duration: 2000,
+              duration: 3000,
             });
             this.router.navigate(['/main/events']);
           }
@@ -146,7 +146,7 @@ export class AddEventFormComponent implements OnInit {
           if (res.status === 422) {
             this.snackBar.openFromComponent(AddEventSnackComponent, {
               data: 'Data is not correct!',
-              duration: 2000,
+              duration: 3000,
             });
           }
 

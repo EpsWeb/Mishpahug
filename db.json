@@ -297,6 +297,25 @@
       "food": "",
       "description": "",
       "id": 1
+    },
+    {
+      "title": "My title",
+      "holiday": "Shabat",
+      "address": {
+        "city": "El Camino Real",
+        "place_id": "ChIJJ7u63CF2j4ARzyIIFFOUaaA",
+        "location": {
+          "lat": 37.58090479999999,
+          "lng": -122.36003870000002
+        }
+      },
+      "confession": "irreligious",
+      "date": "2019-02-12",
+      "time": "11:11:00",
+      "duration": 203,
+      "food": "Kosher",
+      "description": "fwef",
+      "id": 2
     }
   ]
 }
