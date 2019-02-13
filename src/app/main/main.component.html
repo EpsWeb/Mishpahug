@@ -16,7 +16,7 @@
 </div>
 <div class="container-fluid">
 
-  <max-menu *ngIf="isMenuVisible"></max-menu>
+  <max-menu *ngIf="isMenuVisible" (closeMenu)="toogleMenuVisible()"></max-menu>
   <!--<max-welcome></max-welcome>-->
   <router-outlet></router-outlet>
 </div>

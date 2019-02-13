@@ -21,14 +21,13 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'max-test',
-  templateUrl: './test.component.html',
+  selector: 'max-calendar',
+  templateUrl: './calendar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./test.component.sass']
+  styleUrls: ['./calendar.component.sass']
 })
+export class CalendarComponent implements OnInit, OnDestroy {
 
-
-export class TestComponent implements OnInit, OnDestroy {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -169,24 +168,3 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -25,27 +25,37 @@ export class FillProfileComponent implements OnInit {
 
   showError = false;
 
+  proFileData;
+  title = '';
+
   ngOnInit() {
+    this.proFileData = this.authService.getProfileData();
+    console.log(this.proFileData);
+    if (this.proFileData['firstName']) {
+      this.title = 'My profile';
+    } else {
+      this.title = 'Registration';
+    }
     this.route.queryParams
       .subscribe((params: Params) => {
-      if (params['emptyProfile']) {
-        this.showError = true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3500);
-      }
-    })
+        if (params['emptyProfile']) {
+          this.showError = true;
+          setTimeout(() => {
+            this.showError = false;
+          }, 3500);
+        }
+      });
     this.form = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required]),
-      confession: new FormControl('', [Validators.required]),
-      birthDate: new FormControl('', [Validators.required]),
-      marritalStatus: new FormControl('', [Validators.required]),
-      foodPreference: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
-      languages: new FormControl('', [Validators.required]),
-      aboutMySelf: new FormControl('', [Validators.required])
+      firstName: new FormControl(this.proFileData['firstName'], [Validators.required]),
+      lastName: new FormControl(this.proFileData['lastName'], [Validators.required]),
+      phoneNumber: new FormControl(this.proFileData['phoneNumber'], [Validators.required]),
+      confession: new FormControl(this.proFileData['confession'], [Validators.required]),
+      birthDate: new FormControl(this.proFileData['dateOfBirth'], [Validators.required]),
+      marritalStatus: new FormControl(this.proFileData['maritalStatus'], [Validators.required]),
+      foodPreference: new FormControl(this.proFileData['foodPreferences'], [Validators.required]),
+      gender: new FormControl(this.proFileData['gender'], [Validators.required]),
+      languages: new FormControl(this.proFileData['language'], [Validators.required]),
+      aboutMySelf: new FormControl(this.proFileData['description'], [Validators.required])
     });
   }
 

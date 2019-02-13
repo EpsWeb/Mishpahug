@@ -122,7 +122,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
-    // this.uploadEvents();
+    this.uploadEvents();
     this.getUserIP(() => {
       this.http.get('http://api.ipapi.com/api/check?access_key=3f11cd082defe9e03f19b4ffc348076f')
         .subscribe((res) => {
@@ -133,10 +133,10 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         });
     });
 
-    this.s1 = this.eventsService.getAllEvents()
-      .subscribe((events: MishEvent[]) => {
-        this.events = events;
-      });
+    // this.s1 = this.eventsService.getAllEvents()
+    //   .subscribe((events: MishEvent[]) => {
+    //     this.events = events;
+    //   });
   }
 
   openDialog(): void {
@@ -168,21 +168,6 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         this.selectedFood = result['food'];
         this.selectedRadius = result['radius'];
       }
-
-      // const data = {
-      //   'location': {
-      //     'lat': this.lat,
-      //     'lng': this.long,
-      //     'radius': this.selectedRadius
-      //   },
-      //   'filters': {
-      //     'dateFrom': this.selectedDateFromFormatForPipe,
-      //     'dateTo': this.selectedDateToFormatForPipe,
-      //     'holidays': this.selectedHoliday,
-      //     'confession': this.selectedConfession,
-      //     'food': this.selectedFood
-      //   }
-      // };
 
       this.uploadEvents();
 

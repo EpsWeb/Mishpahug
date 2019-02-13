@@ -26,6 +26,12 @@ import {FilterGlobalPipe} from './shared/pipes/filter-global.pipe';
 import {AddEventFormComponent, AddEventSnackComponent} from './add-event-form/add-event-form.component';
 import {BorderZeroDirective} from './shared/directives/borderZero.directive';
 import {AgmCoreModule} from '@agm/core';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { TestSecondaryComponent } from './test-secondary/test-secondary.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,9 @@ import {AgmCoreModule} from '@agm/core';
     AddEventFormComponent,
     BackgroundDirective,
     BorderZeroDirective,
-    AddEventSnackComponent
+    AddEventSnackComponent,
+    TestSecondaryComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +65,13 @@ import {AgmCoreModule} from '@agm/core';
     MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI'
-    })
+    }),
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    NgbModule
   ],
   providers: [
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},

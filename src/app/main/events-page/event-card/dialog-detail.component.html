@@ -4,7 +4,7 @@
       <img mat-card-image src="../../../../assets/icons/banner.png" alt="Photo of a Shiba Inu">
       <div class="card__img__subscr">
       <span>{{ data.event.owner.firstName + ' ' + data.event.owner.lastName }}<br>
-      <bar-rating [theme]="'stars'" name="rating" [rate]="data.event.owner.rate" max="5" required></bar-rating>
+      <bar-rating [theme]="'stars'" name="rating" [rate]="data.event.owner.rate" max="5"></bar-rating>
         <span>({{ data.event.owner.numberOfVotes }} votes)</span>
       </span>
       </div>
@@ -30,7 +30,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button mat-dialog-close (click)="onNoClick()">Cancel</button>
-      <button mat-raised-button (click)="joinEvent(data.event)" cdkFocusInitial>Join event</button>
+      <button mat-raised-button [mat-dialog-close]="data.event" (click)="joinEvent(data.event)" cdkFocusInitial>Join event</button>
     </mat-card-actions>
   </mat-card>
 </div>

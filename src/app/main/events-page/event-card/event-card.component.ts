@@ -2,7 +2,6 @@ import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/
 import {MishEvent} from '../../shared/models/event.model';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {EventsService} from '../../shared/services/events.service';
-import {AddEventSnackComponent} from '../../add-event-form/add-event-form.component';
 import {Message} from '../../shared/models/message.model';
 
 @Component({
@@ -24,14 +23,12 @@ export class EventCardComponent {
 
     dialogDetailRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log(result);
       }
-      console.log(result);
     });
   }
 
-
 }
-
 
 @Component({
   selector: 'max-dialog-detail',
@@ -67,6 +64,7 @@ export class DialogDetailComponent implements OnInit {
   }
 
   joinEvent(ev) {
+    console.log(ev);
     if (ev) {
       this.eventsService.subscriveToEvent(ev['eventId'])
         .subscribe((resp) => {
@@ -74,8 +72,9 @@ export class DialogDetailComponent implements OnInit {
             setTimeout(() => {
               this.dialogDetailRef.close();
             }, 3000);
+            console.log('success');
           },
-          ((res) => {
+          (res) => {
             if (res.status === 401 || res.status === 404) {
               this.showMessage('For joining to event you should authorize', 'danger');
             }
@@ -83,7 +82,8 @@ export class DialogDetailComponent implements OnInit {
             if (res.status === 409) {
               this.showMessage('You are the owner of the event or already subscribed to it!', 'danger');
             }
-          }));
+            console.log('error', res);
+          });
     }
   }
 

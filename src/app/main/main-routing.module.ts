@@ -6,6 +6,8 @@ import {FillProfileComponent} from './fill-profile/fill-profile.component';
 import {TestComponent} from './test/test.component';
 import {EventsPageComponent} from './events-page/events-page.component';
 import {AddEventFormComponent} from './add-event-form/add-event-form.component';
+import {TestSecondaryComponent} from './test-secondary/test-secondary.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -13,8 +15,10 @@ const routes: Routes = [
       {path: 'welcome', component: WelcomeComponent},
       {path: 'fill-profile', component: FillProfileComponent},
       {path: 'test', component: TestComponent},
+      {path: 'test_secondary', component: TestSecondaryComponent},
       {path: 'events', component: EventsPageComponent},
-      {path: 'add-event', component: AddEventFormComponent}
+      {path: 'add-event', component: AddEventFormComponent},
+      {path: 'calendar', component: CalendarComponent}
     ]
   }
 ];

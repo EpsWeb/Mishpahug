@@ -2,6 +2,7 @@
   <div class="avatar">
     <img src="../../../assets/icons/no_avatar(boy).png" alt="photo" class="photo">
   </div>
+  <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
   <div class="container-fluid points-list">
     <div class="row" (click)="goToEvents()">
       <div class="col-4 icon"><i class="fas fa-home"></i></div>
@@ -11,7 +12,7 @@
       <div class="col-4 icon"><i class="fas fa-bell"></i></div>
       <div class="col-8 text">Notice</div>
     </div>
-    <div class="row">
+    <div class="row" (click)="goToCalendar()">
       <div class="col-4 icon"><i class="fas fa-calendar-alt"></i></div>
       <div class="col-8 text">Calendar</div>
     </div>

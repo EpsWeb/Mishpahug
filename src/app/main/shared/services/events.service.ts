@@ -41,14 +41,14 @@ export class EventsService extends BaseApi {
         'Authorization': <string>localStorage.getItem('token')
       })
     };
-    // return this.post('/event/creation', data, httpOptions)
-    return this.post('data', data)
+    // return this.post('data', data)
+    return this.post('/event/creation', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  subscriveToEvent(eventId): Observable<any> {
+  subscriveToEvent(eventId: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -59,6 +59,10 @@ export class EventsService extends BaseApi {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getEventsForCalendarTest(): Observable<any> {
+    return this.get('eventsForCalendar');
   }
 
 }

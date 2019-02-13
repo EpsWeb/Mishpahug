@@ -118,7 +118,7 @@ export class AddEventFormComponent implements OnInit {
     // TODO add request, initialize snackbar
     this.eventsService.createNewEvent(data)
       .subscribe((res) => {
-          console.log(res);
+          // console.log(res);
           this.snackBar.openFromComponent(AddEventSnackComponent, {
             data: 'You created event',
             duration: 3000,
