@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {User} from '../models/user.model';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {BaseApi} from '../core/base-api';
 
 @Injectable()
@@ -11,17 +11,60 @@ export class UserService extends BaseApi {
     super(http);
   }
 
-  getUserByEmail(email: string): Observable<User> {
-    return this.get(`users?email=${email}`)
-      .pipe(map((users: User[]) => users[0] ? users[0] : undefined));
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error);
   }
 
-  registrateNewUser(user: User): Observable<any> {
-    return this.post('users', user);
+  login(email: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(email + ':' + password)
+      })
+    };
+    return this.post('user/login', {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  fillProfile(user: User): Observable<User> {
-    return this.put(`users/${user.id}`, user);
+  updateUserProfile(data: User): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.post('user/profile', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  registrateNewUser(email: string, password: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(email + ':' + password)
+      })
+    };
+    return this.post('user/registration', {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getProfileData(token: string): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.get('user/profile', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 }

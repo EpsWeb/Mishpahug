@@ -1,7 +1,5 @@
 export class User {
   constructor(
-    public email: string,
-    public password: string,
     public firstName: string,
     public lastName: string,
     public phoneNumber: string,
@@ -9,14 +7,14 @@ export class User {
     public maritalStatus: string,
     public gender: string,
     public confession: string,
-    public language: any,
-    public foodPreferences: any,
+    public languages: [string],
+    public foodPreferences: [string],
     public description: string,
-    public pictureLink: any,
-    public banner: string,
-    public rate: number,
-    public numberOfVotes: number,
-    public id?: number
+    public pictureLink: [string, string],
+    public email?: string,
+    public rate?: number,
+    public numberOfVotes?: number,
+    public password?: string,
   ) {
   }
 }

@@ -74,15 +74,15 @@ export class DialogDetailComponent implements OnInit {
             }, 3000);
             console.log('success');
           },
-          (res) => {
-            if (res.status === 401 || res.status === 404) {
+          (err) => {
+            if (err.status === 401 || err.status === 404) {
               this.showMessage('For joining to event you should authorize', 'danger');
             }
 
-            if (res.status === 409) {
+            if (err.status === 409) {
               this.showMessage('You are the owner of the event or already subscribed to it!', 'danger');
             }
-            console.log('error', res);
+            console.log('error', err);
           });
     }
   }

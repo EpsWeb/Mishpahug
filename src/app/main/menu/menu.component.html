@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div *ngIf="isLoaded" class="sidebar">
   <div class="avatar">
     <img src="../../../assets/icons/no_avatar(boy).png" alt="photo" class="photo">
   </div>
@@ -8,9 +8,9 @@
       <div class="col-4 icon"><i class="fas fa-home"></i></div>
       <div class="col-8 text">Events</div>
     </div>
-    <div class="row">
+    <div class="row" (click)="goToNotice()">
       <div class="col-4 icon"><i class="fas fa-bell"></i></div>
-      <div class="col-8 text">Notice</div>
+      <div class="col-8 text">Notice <span class="unreadMessages">{{ countOfUnreadNotifications }}</span></div>
     </div>
     <div class="row" (click)="goToCalendar()">
       <div class="col-4 icon"><i class="fas fa-calendar-alt"></i></div>

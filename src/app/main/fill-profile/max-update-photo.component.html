@@ -1,0 +1,46 @@
+<div #dialog class="container dialog">
+  <div class="dialog__logo">
+    <img src="../../../assets/icons/Group_258.png" alt="">
+  </div>
+  <div class="dialog__content">
+    <div class="dialog__content__title">
+      <p>Update picture</p>
+    </div>
+    <file-drop class="dialog__content__file-drop" headertext="You can also drag and drop an image file into the dashed area." (onFileDrop)="dropped($event)">
+    </file-drop>
+    <div class="dialog__content__buttons">
+      <button mat-raised-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+      <button mat-raised-button [mat-dialog-close]="image_url" cdkFocusInitial>Upload</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<!--<div class="center">-->
+<!--<file-drop headertext="Drop files here" (onFileDrop)="dropped($event)"-->
+<!--(onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">-->
+<!--<span>optional content (don't set headertext then)</span>-->
+<!--</file-drop>-->
+<!--<div class="upload-table">-->
+<!--<table class="table">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>Name</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody class="upload-name-style">-->
+<!--<tr *ngFor="let item of files; let i=index">-->
+<!--<td><strong>{{ item.relativePath }}</strong></td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+

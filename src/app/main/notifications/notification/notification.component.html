@@ -1,0 +1,59 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="openPanel()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>{{ notification.title }}</h5>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>today</mat-icon>
+        <h6>{{ notification.date }}</h6>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{ notification.message }}</p>
+  </mat-expansion-panel>
+  <div class="read" *ngIf="!notification.read">
+    Read
+  </div>
+</mat-accordion>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

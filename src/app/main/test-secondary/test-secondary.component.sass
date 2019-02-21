@@ -1,0 +1,66 @@
+@import '../../../assets/sass/vars'
+
+mat-radio-button
+  display: block
+
+button
+  display: inline
+  background-color: $indigo
+  color: white
+  font-weight: 600
+  margin-right: 0.3rem
+  text-transform: uppercase
+  margin-bottom: 1rem
+
+.dialog
+  position: relative
+  max-width: 80vw
+  max-height: 80vh
+
+
+  &__form
+    padding-top: 2.5rem
+    &__buttons, &__header
+      text-align: center
+    &__buttons
+      margin-bottom: 2rem
+  &__logo
+    position: absolute
+    top: 0
+    width: calc(100% + 48px)
+    background-color: $indigo
+    padding-left: 1.5rem
+    height: 7vh
+    margin: -24px -24px 5px -39px
+    img
+      height: 100%
+
+/*==========  Desktop First  ==========*/
+
+// ≥1200px
++media-breakpoint-down(lg)
+
+// ≥992px
++media-breakpoint-down(md)
+
+// ≥768px
++media-breakpoint-down(sm)
+
+
+// ≥576px
++media-breakpoint-down(xs)
+
+
+/*==========  Mobile First  ==========*/
+
+// ≤576px
++media-breakpoint-up(sm)
+
+// ≤768px
++media-breakpoint-up(md)
+
+// ≤992px
++media-breakpoint-up(lg)
+
+// ≤1200px
++media-breakpoint-up(xl)

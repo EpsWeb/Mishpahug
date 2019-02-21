@@ -6,8 +6,6 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {Message} from '../shared/models/message.model';
 
 @Component({
   selector: 'max-events-page',
@@ -15,8 +13,8 @@ import {Message} from '../shared/models/message.model';
   styleUrls: ['./events-page.component.sass']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
-  // TODO delete pipes except of city-pipe, uncomment uploadEvents() in ngOnInit
-  constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router, private http: HttpClient) {
+  // TODO delete pipes except of city-pipe
+  constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router) {
   }
 
   dateFrom: string;
@@ -47,11 +45,13 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   selectedDateToFormatForDB = '';
   selectedDateToFormatForPipe = '';
 
-  lat;
-  long;
+  lat = 32.4;
+  long = 35.3;
   showMessage = false;
+  geolocationPosition;
+  isLoaded = false;
 
-  uploadEvents() {
+  uploadEvents(pageIndex) {
     const data = {
       'location': {
         'lat': this.lat,
@@ -67,6 +67,10 @@ export class EventsPageComponent implements OnInit, OnDestroy {
       }
     };
 
+    console.log(this.selectedPage);
+    // console.log(e);
+    this.selectedPage = pageIndex;
+
     this.eventsService.getAllEventsProgressList(data, this.selectedPage)
       .subscribe((res) => {
           this.events = res['content'];
@@ -80,70 +84,30 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         });
   }
 
-
-  getUserIP = function (onNewIP) {
-    const myPeerConnection = RTCPeerConnection || webkitRTCPeerConnection;
-    const pc = new myPeerConnection({
-        iceServers: []
-      }),
-      localIPs = {},
-      ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
-
-    // key;
-
-    function iterateIP(ip) {
-      if (!localIPs[ip]) {
-        onNewIP(ip);
-      }
-      localIPs[ip] = true;
-    }
-
-    pc.createDataChannel('');
-
-    pc.createOffer().then(function (sdp) {
-      sdp.sdp.split('\n').forEach(function (line) {
-        if (line.indexOf('candidate') < 0) {
-          return;
-        }
-        line.match(ipRegex).forEach(iterateIP);
-      });
-
-      pc.setLocalDescription(sdp);
-    }).catch(function (reason) {
-      // An error occurred, so handle the failure to connect
-    });
-
-    pc.onicecandidate = function (ice) {
-      if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) {
-        return;
-      }
-      ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
-    };
-  };
-
   ngOnInit() {
-    this.uploadEvents();
-    this.getUserIP(() => {
-      this.http.get('http://api.ipapi.com/api/check?access_key=3f11cd082defe9e03f19b4ffc348076f')
-        .subscribe((res) => {
-          console.log(res);
-          this.lat = res['latitude'];
-          this.long = res['longitude'];
-          console.log(this.lat, this.long);
-        });
-    });
-
-    // this.s1 = this.eventsService.getAllEvents()
-    //   .subscribe((events: MishEvent[]) => {
-    //     this.events = events;
-    //   });
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.geolocationPosition = position;
+          console.log(this.geolocationPosition);
+          this.lat = position['coords']['latitude'];
+          this.long = position['coords']['longitude'];
+          this.uploadEvents(0);
+          this.isLoaded = true;
+        },
+        error => {
+          console.log(error.code);
+        }
+      );
+    }
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {});
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result);
+      console.log(this.long, this.lat);
+      console.log(result);
 
       this.selectedFood = '';
       this.selectedHoliday = '';
@@ -169,7 +133,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
         this.selectedRadius = result['radius'];
       }
 
-      this.uploadEvents();
+      this.uploadEvents(0);
 
     });
   }
@@ -197,7 +161,7 @@ export class DialogComponent implements OnInit {
   }
 
   confessions = ['irreligious', 'religious'];
-  holidays = ['Shabat', 'Purim', 'Pesach', 'Rosh Hashana', 'Sukkot'];
+  holidays = ['Shabat', 'Purim', 'Pesah', 'Rosh Hashana', 'Sukkot'];
   foods = ['Kosher', 'Vegetarian', 'Any'];
 
   form: FormGroup;

@@ -1,43 +1,46 @@
-<div class="events__title">
-  <h2>Find event</h2>
-</div>
-<div class="alert alert-danger text-center col-6 offset-3 col-md-2 offset-md-5" *ngIf="showMessage">Server Error</div>
-<div class="events__filters row">
-
-  <div class="col-3 col-sm-2 offset-1 offset-md-2 events__filters__global">
-    <button mat-raised-button (click)="openDialog()">Filters</button>
+<div class="text-center" *ngIf="!isLoaded">Loading...</div>
+<div *ngIf="isLoaded">
+  <div class="events__title">
+    <h2>Find event</h2>
   </div>
+  <div class="alert alert-danger text-center col-6 offset-3 col-md-2 offset-md-5" *ngIf="showMessage">Server Error</div>
+  <div class="events__filters row">
 
-  <button mat-raised-button class="col-5 offset-8 offset-md-0 col-sm-2 events__filters__city">
-    <mat-select placeholder="Cities" [(ngModel)]="selectedCity">
-      <mat-option *ngFor="let city of cities" [value]="city">
-        {{city}}
-      </mat-option>
-    </mat-select>
-  </button>
-</div>
-
-<div class="container">
-  <div class="events__cards row">
-
-    <div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3"
-         *ngFor="let e of events | maxFilterCity:selectedCity | maxFilterGlobal:selectedFood:selectedConfession:selectedHoliday:selectedDateFromFormatForPipe:selectedDateToFormatForPipe">
-      <max-event-card [event]="e"></max-event-card>
+    <div class="col-3 col-sm-2 offset-1 offset-md-2 events__filters__global">
+      <button mat-raised-button (click)="openDialog()">Filters</button>
     </div>
 
+    <button mat-raised-button class="col-5 offset-8 offset-md-0 col-sm-2 events__filters__city">
+      <mat-select placeholder="Cities" [(ngModel)]="selectedCity">
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+    </button>
   </div>
-</div>
-<div class="events__add" (click)="goToAddEvent()">
-  <span>+</span>
-</div>
 
-<mat-paginator class="events__filters__paginator"
-               [length]="countEvents"
-               pageSize="12"
-               (page)="uploadEvents()"
->
-</mat-paginator>
+  <div class="container">
+    <div class="events__cards row">
 
+      <div class="events__cards__card col-12 col-sm-6 col-md-4 col-lg-3"
+           *ngFor="let e of events | maxFilterCity:selectedCity">
+        <max-event-card [event]="e"></max-event-card>
+      </div>
+
+    </div>
+  </div>
+  <div class="events__add" (click)="goToAddEvent()">
+    <span>+</span>
+  </div>
+
+  <mat-paginator class="events__filters__paginator"
+                 [length]="countEvents"
+                 [(pageIndex)]="selectedPage"
+                 pageSize="12"
+                 (page)="uploadEvents($event['pageIndex'])"
+  >
+  </mat-paginator>
+</div>
 
 
 

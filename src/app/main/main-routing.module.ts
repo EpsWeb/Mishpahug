@@ -8,6 +8,7 @@ import {EventsPageComponent} from './events-page/events-page.component';
 import {AddEventFormComponent} from './add-event-form/add-event-form.component';
 import {TestSecondaryComponent} from './test-secondary/test-secondary.component';
 import {CalendarComponent} from './calendar/calendar.component';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       {path: 'test_secondary', component: TestSecondaryComponent},
       {path: 'events', component: EventsPageComponent},
       {path: 'add-event', component: AddEventFormComponent},
-      {path: 'calendar', component: CalendarComponent}
+      {path: 'calendar', component: CalendarComponent},
+      {path: 'notifications', component: NotificationsComponent}
     ]
   }
 ];

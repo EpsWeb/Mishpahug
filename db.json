@@ -53,8 +53,8 @@
       "id": 2
     },
     {
-      "email": "ewfm@mail.ru",
-      "password": "123123",
+      "email": "johnDoe@gmail.com",
+      "password": "123456789",
       "firstName": "dfbsb",
       "lastName": "sfbfsb",
       "phoneNumber": 123,
@@ -413,5 +413,43 @@
         "status": "In progress"
       }
     ]
-  }
+  },
+  "notifications": [
+    {
+      "notificationId": 4,
+      "title": "Invitation",
+      "message": "You was invited to event 'Pesah'",
+      "date": "2018-03-19",
+      "type": "System",
+      "isRead": false,
+      "eventId": 125
+    },
+    {
+      "notificationId": 3,
+      "title": "Invitation",
+      "message": "You was invited to event 'Pesah'",
+      "date": "2018-03-15",
+      "type": "System",
+      "isRead": false,
+      "eventId": 125
+    },
+    {
+      "notificationId": 2,
+      "title": "Invitation",
+      "message": "You was invited to event 'Pesah'",
+      "date": "2018-03-21",
+      "type": "System",
+      "isRead": true,
+      "eventId": 123
+    },
+    {
+      "notificationId": 1,
+      "title": "Vote event",
+      "message": "You should vote for the event 'Shabbat'",
+      "date": "2018-03-19",
+      "type": "System",
+      "isRead": true,
+      "eventId": 124
+    }
+  ]
 }

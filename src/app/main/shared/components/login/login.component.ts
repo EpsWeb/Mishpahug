@@ -51,31 +51,37 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     // console.log(form);
     const {email, password} = form.value;
-    this.userService.getUserByEmail(email)
+    this.userService.login(email, password)
       .subscribe((user: User) => {
-        if (!user) {
+        // TODO Success response
+        // Hide createAccount and login, appear burger
+        this.cancelLogin();
+
+        this.login.emit();
+        window.localStorage.clear();
+        window.localStorage.setItem('user', JSON.stringify(user));
+        window.localStorage.setItem('token', 'Basic ' + btoa(email + ':' + password));
+      }, (err) => {
+        if (err.status === 401) {
+          // TODO Wrong login or password!
           this.showMessage('Email or password is wrong', 'warning');
-        } else {
-          if (user.password === password) {
-            this.cancelLogin();
-            this.authService.login();
-            window.localStorage.clear();
-            window.localStorage.setItem('user', JSON.stringify(user));
-            window.localStorage.setItem('token', btoa(user.email + ':' + user.password));
-            if (JSON.parse(localStorage.getItem('user')).firstName) {
-              this.authService.fillFullProfile();
+        } else if (err.status === 409) {
+          // TODO User has empty profile!
+          this.cancelLogin();
+          this.login.emit();
+          window.localStorage.clear();
+          window.localStorage.setItem('token', 'Basic ' + btoa(email + ':' + password));
+          this.router.navigate(['main/fill-profile'], {
+            queryParams: {
+              'emptyProfile': true
             }
-            this.login.emit();
-            this.router.navigate(['main/fill-profile']);
-            console.log(user);
-          } else {
-            this.showMessage('Email ot password is wrong', 'warning');
-          }
+          });
         }
-        console.log('isFilledFullProfile', this.authService.isFilledFullProfile());
-        console.log('isAuthenticate', this.authService.isAuthenticate());
       });
   }
+
+  // console.log('isFilledFullProfile', this.authService.isFilledFullProfile());
+  // console.log('isAuthenticate', this.authService.isAuthenticate());
 
 }
 

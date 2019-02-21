@@ -1,9 +1,12 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {addMinutes, isSameDay, isSameMonth} from 'date-fns';
-import {Subject, Subscription} from 'rxjs';
+import {Subject, Subscription, throwError} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {EventsService} from '../shared/services/events.service';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {AdditionalDataForCalendarEvent} from '../shared/models/additionalDataForCalendarEvent.model';
 
 const colors: any = {
   red: {
@@ -23,7 +26,7 @@ const colors: any = {
 @Component({
   selector: 'max-calendar',
   templateUrl: './calendar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit, OnDestroy {
@@ -38,56 +41,19 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: CalendarEvent<AdditionalDataForCalendarEvent>;
   };
+
+  isLoaded = false;
 
   refresh: Subject<any> = new Subject();
 
-  // events: CalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     allDay: true
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: new Date(),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   }
-  // ];
   events: CalendarEvent[] = [];
-  countOfMyEvents: number;
-  countOfSubscribedEvents: number;
+  countOfMyEvents = 0;
+  countOfSubscribedEvents = 0;
+  currentMonth = new Date().getMonth() + 1;
 
-  activeDayIsOpen = true;
+  activeDayIsOpen = false;
 
   s1: Subscription;
 
@@ -95,10 +61,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
     console.log(this.events);
   }
 
-  ngOnInit() {
-    this.s1 = this.eventsService.getEventsForCalendarTest()
+  fixData(month: number) {
+    if (this.s1) {
+      this.s1.unsubscribe();
+    }
+    this.s1 = this.eventsService.getEventsForCalendar(month)
       .subscribe((res) => {
         console.log(res);
+        this.events = [];
         res['myEvents'].map((e) => {
           const start = new Date(e.date + ' ' + e.time);
           const end = addMinutes(new Date(e.date + ' ' + e.time), e.duration);
@@ -126,9 +96,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
         console.log(res['myEvents'].length);
         this.countOfMyEvents = res['myEvents'].length;
         this.countOfSubscribedEvents = res['subscribedEvents'].length;
+        this.isLoaded = true;
       });
-    console.log(this.events);
-    console.log(this.modalContent);
+  }
+
+  ngOnInit() {
+    this.fixData(this.currentMonth);
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -156,9 +129,22 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CalendarEvent<AdditionalDataForCalendarEvent>): void {
     this.modalData = {event, action};
+    // this.eventsService.getMyEventInfo(ev)
+    // this.modalData.meta = new AdditionalDataForCalendarEvent()
+    console.log(this.modalData.event);
     this.modal.open(this.modalContent, {size: 'lg'});
+  }
+
+  previousMonth() {
+    this.activeDayIsOpen = false;
+    this.fixData(--this.currentMonth);
+  }
+
+  nextMonth() {
+    this.activeDayIsOpen = false;
+    this.fixData(++this.currentMonth);
   }
 
   ngOnDestroy() {

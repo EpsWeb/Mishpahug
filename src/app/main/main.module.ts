@@ -7,7 +7,7 @@ import {LoginComponent} from './shared/components/login/login.component';
 import {RegistrationComponent} from './shared/components/registration/registration.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {MenuComponent} from './menu/menu.component';
-import {FillProfileComponent} from './fill-profile/fill-profile.component';
+import {FillProfileComponent, UpdatePhotoComponent} from './fill-profile/fill-profile.component';
 import {SharedModule} from './shared/shared.module';
 import {
   ErrorStateMatcher,
@@ -32,6 +32,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { TestSecondaryComponent } from './test-secondary/test-secondary.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationComponent } from './notifications/notification/notification.component';
+import {FileDropModule} from 'ngx-file-drop';
+import {CloudinaryConfiguration, CloudinaryModule} from '@cloudinary/angular-5.x';
+import {Cloudinary} from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,10 @@ import { CalendarComponent } from './calendar/calendar.component';
     BorderZeroDirective,
     AddEventSnackComponent,
     TestSecondaryComponent,
-    CalendarComponent
+    CalendarComponent,
+    NotificationsComponent,
+    NotificationComponent,
+    UpdatePhotoComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +79,9 @@ import { CalendarComponent } from './calendar/calendar.component';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    NgbModule
+    NgbModule,
+    FileDropModule,
+    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'danielepel', upload_preset: 'bkahmhvk' } as CloudinaryConfiguration),
   ],
   providers: [
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},
@@ -84,7 +94,9 @@ import { CalendarComponent } from './calendar/calendar.component';
     EventCardComponent,
     DialogDetailComponent,
     AddEventFormComponent,
-    AddEventSnackComponent
+    AddEventSnackComponent,
+    FillProfileComponent,
+    UpdatePhotoComponent
   ]
 })
 export class MainModule {

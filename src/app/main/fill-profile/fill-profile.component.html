@@ -1,4 +1,6 @@
-<div class="container-fluid">
+<div class="text-center" *ngIf="!isLoaded">Loading...</div>
+
+<div *ngIf="isLoaded" class="container-fluid">
   <div class="row fill-profile__header">
     <div class="col-lg-3 offset-lg-2 col-10 offset-1">
       <img src="../../../assets/icons/Group_258.png" alt="">
@@ -23,7 +25,7 @@
             </div>
             <div class="example-container">
               <mat-form-field maxBackground>
-                <input matInput type="text" id="firstName" formControlName="firstName" placeholder="First Name *">
+                <input matInput type="text" id="firstName" formControlName="firstName" placeholder="First Name *" [value]="proFileData.firstName">
                 <mat-error *ngIf="form.get('firstName').invalid && form.get('firstName').touched">
                   This field is mandatory
                 </mat-error>
@@ -31,13 +33,13 @@
             </div>
             <div class="example-container">
               <mat-form-field maxBackground>
-                <input matInput type="text" id="lastName" formControlName="lastName" placeholder="Last Name *">
+                <input matInput type="text" id="lastName" formControlName="lastName" placeholder="Last Name *" [value]="proFileData.lastName">
               </mat-form-field>
             </div>
             <div class="example-container">
               <mat-form-field maxBackground>
                 <input matInput type="number" id="phoneNumber" formControlName="phoneNumber"
-                       placeholder="Phone Number *">
+                       placeholder="Phone Number *" [value]="proFileData.phoneNumber">
                 <mat-error *ngIf="form.get('phoneNumber').invalid && form.get('phoneNumber').touched">
                   This field is mandatory
                 </mat-error>
@@ -121,7 +123,7 @@
             <div class="example-container">
               <mat-form-field maxBackground #aaa>
                 <textarea matInput placeholder="Write few words about yourself *"
-                          formControlName="aboutMySelf" maxlength="300"></textarea>
+                          formControlName="aboutMySelf" maxlength="300" [value]="proFileData.description"></textarea>
                 <mat-error *ngIf="form.get('aboutMySelf').invalid && form.get('aboutMySelf').touched">
                   This field is mandatory
                 </mat-error>
@@ -141,13 +143,13 @@
       <div class="fill-profile__content__photos col-lg-3 offset-lg-0 col-10 offset-1 mt-lg-2 mt-4">
 
         <div class="avatar-wrapper">
-          <input class="photo avatar" type="image" src="../../../assets/icons/no_avatar(boy).png" width="150"
-                 alt="avatar">
-          <h4>Change avatar</h4>
+          <img class="photo avatar" [src]=srcAvatar width="200" height="200"
+                 alt="avatar" (click)="openDialog('avatar')">
+          <h4>Avatar</h4>
         </div>
         <div class="banner-wrapper">
-          <input class="photo banner" type="image" src="../../../assets/icons/banner.png" width="200" alt="banner">
-          <h4>Change banner</h4>
+          <img class="photo banner" [src]=srcBanner width="250" alt="banner" (click)="openDialog('banner')">
+          <h4>Banner</h4>
         </div>
 
       </div>

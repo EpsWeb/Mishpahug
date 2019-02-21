@@ -7,17 +7,17 @@ export class BaseApi {
   constructor(public http: HttpClient) {
   }
 
-  baseApi = 'http://localhost:3000/';
+  baseApi = 'https://starlark-mishpahug.herokuapp.com/';
 
-  get(text: string, headers: any = ''): Observable<any> {
+  get(text: string, headers?: any): Observable<any> {
     return this.http.get(this.baseApi + text, headers);
   }
 
-  post(text: string, obj: any, headers: any = ''): Observable<any> {
+  post(text: string, obj: any, headers?: any): Observable<any> {
     return this.http.post(this.baseApi + text, obj, headers);
   }
 
-  put(text: string, obj: any, headers: any = ''): Observable<any> {
+  put(text: string, obj: any, headers?: any): Observable<any> {
     return this.http.put(this.baseApi + text, obj, headers);
   }
 }

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {NotificationsService} from '../shared/services/notifications.service';
 
 @Component({
   selector: 'max-menu',
@@ -10,12 +11,28 @@ import {Router} from '@angular/router';
 export class MenuComponent implements OnInit {
   @Output('closeMenu') closeMenu = new EventEmitter<any>();
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private notificationsService: NotificationsService) {
   }
 
   message = '';
+  countOfUnreadNotifications;
+
+  isLoaded = false;
 
   ngOnInit() {
+    this.notificationsService.getCountOfUnreadNotifications()
+      .subscribe((res) => {
+        this.countOfUnreadNotifications = res['notificationsCount'];
+        this.isLoaded = true;
+      }, (err) => {
+        setTimeout(() => {
+          this.message = 'User has empty profile!';
+        }, 300);
+        setTimeout(() => {
+          this.message = '';
+        }, 3000);
+      });
+
     if (!this.authService.getProfileData()['firstName']) {
       setTimeout(() => {
         this.message = 'User has empty profile!';
@@ -47,4 +64,25 @@ export class MenuComponent implements OnInit {
     this.closeMenu.emit();
   }
 
+  goToNotice() {
+    this.router.navigate(['main/notifications']);
+    this.closeMenu.emit();
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

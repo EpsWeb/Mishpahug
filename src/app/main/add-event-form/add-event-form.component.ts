@@ -109,7 +109,7 @@ export class AddEventFormComponent implements OnInit {
       'date': dateFrom,
       'time': timeFrom + ':00',
       'duration': duration,
-      'food': food,
+      'food': [food],
       'description': about
     };
 

@@ -42,7 +42,7 @@ export class EventsService extends BaseApi {
       })
     };
     // return this.post('data', data)
-    return this.post('/event/creation', data, httpOptions)
+    return this.post('event/creation', data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -61,8 +61,54 @@ export class EventsService extends BaseApi {
       );
   }
 
+  getEventsForCalendar(month: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.http.get(`https://starlark-mishpahug.herokuapp.com/event/calendar/${month}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getEventsForCalendarTest(): Observable<any> {
     return this.get('eventsForCalendar');
   }
 
+  getMyEventInfo(eventId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.http.get(`https://starlark-mishpahug.herokuapp.com/event/own/${eventId}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

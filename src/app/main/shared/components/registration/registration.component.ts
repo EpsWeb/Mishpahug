@@ -52,17 +52,16 @@ export class RegistrationComponent implements OnInit {
       this.showMessage('Passwords are not same');
       return;
     } else {
-      const user = new User(email, password, '', '', '', '', '', '', '', [], [], '', [], '', 0, 0);
-      this.userService.getUserByEmail(email)
-        .subscribe((userFromBase: User) => {
-          if (userFromBase) {
-            this.showMessage('This password is employed');
-          } else {
-            this.userService.registrateNewUser(user)
-              .subscribe((newUser: User) => {
-                this.router.navigate(['main/fill-profile']);
-                this.cancelRegistration();
-              });
+      this.userService.registrateNewUser(email, password)
+        .subscribe((res) => {
+          this.cancel.emit();
+          // Hide createAccount and login, appear burger
+          this.router.navigate(['main/fill-profile']);
+        }, (err) => {
+          if (err.status === 409) {
+            this.showMessage('User exists!');
+          } else if (err.status === 422) {
+            this.showMessage('Invalid data!');
           }
         });
     }
