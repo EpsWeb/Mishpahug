@@ -1,0 +1,175 @@
+<div class="text-center" *ngIf="!isLoaded">Loading...</div>
+<div class="container">
+  <mat-tab-group mat-align-tabs="center" *ngIf="isLoaded">
+    <mat-tab class="participation__tab">
+      <ng-template mat-tab-label>
+        <span class="participation__header">In progress</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="participation__inProgressPageTitle" *ngIf="eventsInProgress.length === 0">
+          ​ You are not subscribed to any even​t. ​Go to ​ <a [routerLink]="['/main/events']">events</a> ​ to find
+          current events
+        </div>
+        <mat-accordion *ngFor="let eventInProgress of eventsInProgress">
+          <mat-expansion-panel>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 style="font-weight: bold;">{{ eventInProgress.title }}</h5>
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>today</mat-icon>
+                {{ eventInProgress.date }}
+                <mat-icon>access_time</mat-icon>
+                {{ eventInProgress.time }}
+              </mat-panel-description>
+
+              <ng-template matExpansionPanelContent>
+
+                <div class="container panel-content">
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: center;">
+                      <img [src]="eventInProgress['owner']['pictureLink'][1]" alt="Img">
+                      <br>
+                      <h3>{{eventInProgress['owner']['fullName']}}</h3>
+                      <div style="margin-top: -1rem">
+                        <bar-rating [theme]="'stars'" [rate]="eventInProgress.owner.rate" max="5"></bar-rating>
+                        <span class="stars">({{ eventInProgress.owner.numberOfVoters }} votes)</span>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 participation__inProgress__desc__right">
+                      <p>{{ eventInProgress['title'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Confession:</span> {{
+                        eventInProgress['confession'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Kitchen:</span> {{
+                        eventInProgress['food'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Duration:</span> {{
+                        getDuration(eventInProgress['duration']) }}</p>
+                      <p>
+                        <mat-icon>place</mat-icon>
+                        <span class="participation__inProgress__desc__right__city">{{ eventInProgress['address']['city'] }}</span>
+                      </p>
+                      <button mat-raised-button (click)="openUnsubscribeDialog(eventInProgress)">Unsubscribe</button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </ng-template>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="participation__header">Pending</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="participation__inProgressPageTitle" *ngIf="eventsPending.length === 0">
+          ​ You are not subscribed to any even​t. ​Go to ​ <a [routerLink]="['/main/events']">events</a> ​ to find
+          current events
+        </div>
+        <mat-accordion *ngFor="let eventPending of eventsPending">
+          <mat-expansion-panel (closed)="isMapVisible = false">
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 style="font-weight: bold;">{{ eventPending.title }}</h5>
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>today</mat-icon>
+                {{ eventPending.date }}
+                <mat-icon>access_time</mat-icon>
+                {{ eventPending.time }}
+              </mat-panel-description>
+
+              <ng-template matExpansionPanelContent>
+
+                <div class="container panel-content">
+                  <div class="row">
+                    <div class="col-md-6" style="text-align: center;">
+                      <img [src]="eventPending['owner']['pictureLink'][1]" alt="Img">
+                      <br>
+                      <h3>{{eventPending['owner']['fullName']}}</h3>
+                      <div style="margin-top: -1rem">
+                        <bar-rating [theme]="'stars'" [rate]="eventPending.owner.rate" max="5"></bar-rating>
+                        <span class="stars">({{ eventPending.owner.numberOfVoters }} votes)</span>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 participation__inProgress__desc__right">
+                      <p>{{ eventPending['title'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Confession:</span> {{
+                        eventPending['confession'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Kitchen:</span> {{
+                        eventPending['food'] }}</p>
+                      <p><span class="participation__inProgress__desc__right__propName">Duration:</span> {{
+                        getDuration(eventPending['duration']) }}</p>
+                      <p>
+                        <mat-icon>place</mat-icon>
+                        <span
+                          class="participation__inProgress__desc__right__city">{{ eventPending['address']['city'] }}</span>
+                      </p>
+                      <p><span
+                        class="participation__inProgress__desc__right__city">{{ eventPending['owner']['phoneNumber'] }}</span></p>
+                      <button mat-raised-button (click)="openMap(eventPending['address']['location']['lat'],
+                      eventPending['address']['location']['lng'])">Show on map</button>
+                      <agm-map [latitude]="latMap" [longitude]="lngMap" *ngIf="isMapVisible">
+                        <agm-marker [latitude]="latMap" [longitude]="lngMap">
+                          <agm-info-window>
+                            <strong>{{ eventPending['title'] }}</strong>
+                          </agm-info-window>
+                        </agm-marker>
+                      </agm-map>
+                    </div>
+                  </div>
+
+                </div>
+
+              </ng-template>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="participation__header">Done</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="participation__inProgressPageTitle" *ngIf="eventsDone.length === 0">
+          ​ ​ You don’t have any even​ts to
+          vote for. ​Go to ​ <a [routerLink]="['/main/events']">events</a> ​ to find
+          current events
+        </div>
+        <mat-accordion *ngFor="let eventDone of eventsDone">
+          <mat-expansion-panel>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 style="font-weight: bold;">{{ eventDone.title }}</h5>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span class="participation__header__vote">Please vote</span>
+                <mat-icon>today</mat-icon>{{ eventDone.date }}
+              </mat-panel-description>
+
+              <ng-template matExpansionPanelContent>
+
+                <p>{{ eventDone.description }}</p>
+                <button mat-raised-button (click)="openVoteDialog(eventDone)">Vote for the event</button>
+
+              </ng-template>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

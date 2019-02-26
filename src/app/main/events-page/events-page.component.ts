@@ -23,7 +23,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
   confession: string;
   food: string;
 
-  cities = ['None', 'Afula', 'Akko', 'Arad', 'Ashdod', 'Ashqelon', 'Bat-Yam', 'Beersheba', 'Bet-Sheʾan', 'Bet-Sheʿarim',
+  cities = ['None', 'Afula', 'Akko', 'Arad', 'Ashdod', 'Ashkelon', 'Bat-Yam', 'Beersheba', 'Bet-Sheʾan', 'Bet-Sheʿarim',
     'Bnei-Brak', 'Caesarea', 'Dimona', 'Dor', 'Elat', 'En-Gedi', 'Givʿatayim', 'Hadera', 'Haifa',
     'Herzliya', 'Holon', 'Jerusalem', 'Karmiʾel', 'Kefar Sava', 'Lod', 'Meron', 'Nahariyya',
     'Nazareth', 'Netanya', 'Petah-Tiqwa', 'Qiryat-Shemona', 'Ramat-Gan', 'Ramla', 'Rehovot',

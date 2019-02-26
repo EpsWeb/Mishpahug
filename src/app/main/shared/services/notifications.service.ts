@@ -48,7 +48,7 @@ export class NotificationsService extends BaseApi {
         'Authorization': <string>localStorage.getItem('token')
       })
     };
-    return this.put(`notification/isRead/${notificationId}`, httpOptions)
+    return this.put(`notification/isRead/${notificationId}`, {}, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -9,6 +9,8 @@ import {AddEventFormComponent} from './add-event-form/add-event-form.component';
 import {TestSecondaryComponent} from './test-secondary/test-secondary.component';
 import {CalendarComponent} from './calendar/calendar.component';
 import {NotificationsComponent} from './notifications/notifications.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {ParticipationListComponent} from './participation-list/participation-list.component';
 
 const routes: Routes = [
   {
@@ -20,7 +22,9 @@ const routes: Routes = [
       {path: 'events', component: EventsPageComponent},
       {path: 'add-event', component: AddEventFormComponent},
       {path: 'calendar', component: CalendarComponent},
-      {path: 'notifications', component: NotificationsComponent}
+      {path: 'notifications', component: NotificationsComponent},
+      {path: 'employees', component: EmployeesComponent},
+      {path: 'participation', component: ParticipationListComponent}
     ]
   }
 ];
@@ -31,3 +35,35 @@ const routes: Routes = [
 })
 export class MainRoutingModule {
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

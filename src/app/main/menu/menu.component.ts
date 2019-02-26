@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {NotificationsService} from '../shared/services/notifications.service';
+import {UserService} from '../shared/services/user.service';
+import {User} from '../shared/models/user.model';
 
 @Component({
   selector: 'max-menu',
@@ -11,11 +13,12 @@ import {NotificationsService} from '../shared/services/notifications.service';
 export class MenuComponent implements OnInit {
   @Output('closeMenu') closeMenu = new EventEmitter<any>();
 
-  constructor(private authService: AuthService, private router: Router, private notificationsService: NotificationsService) {
+  constructor(private authService: AuthService, private router: Router, private notificationsService: NotificationsService, private userService: UserService) {
   }
 
   message = '';
   countOfUnreadNotifications;
+  avatarURL = '';
 
   isLoaded = false;
 
@@ -31,6 +34,11 @@ export class MenuComponent implements OnInit {
         setTimeout(() => {
           this.message = '';
         }, 3000);
+      });
+
+    this.userService.getProfileData(<string>localStorage.getItem('token'))
+      .subscribe((profileData: User) => {
+        this.avatarURL = profileData.pictureLink[0];
       });
 
     if (!this.authService.getProfileData()['firstName']) {
@@ -66,6 +74,11 @@ export class MenuComponent implements OnInit {
 
   goToNotice() {
     this.router.navigate(['main/notifications']);
+    this.closeMenu.emit();
+  }
+
+  goToParticipation() {
+    this.router.navigate(['main/participation']);
     this.closeMenu.emit();
   }
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NotificationsService} from '../../shared/services/notifications.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {NotificationsService} from '../../shared/services/notifications.service'
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.sass']
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
   @Input('notification') notification: any;
 
   constructor(private notificationsService: NotificationsService) {
@@ -21,9 +21,6 @@ export class NotificationComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-  }
-
-  ngOnInit() {
   }
 
 }

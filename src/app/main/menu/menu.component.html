@@ -1,6 +1,6 @@
 <div *ngIf="isLoaded" class="sidebar">
   <div class="avatar">
-    <img src="../../../assets/icons/no_avatar(boy).png" alt="photo" class="photo">
+    <img [src]=avatarURL alt="photo" class="photo">
   </div>
   <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
   <div class="container-fluid points-list">
@@ -16,7 +16,7 @@
       <div class="col-4 icon"><i class="fas fa-calendar-alt"></i></div>
       <div class="col-8 text">Calendar</div>
     </div>
-    <div class="row">
+    <div class="row" (click)="goToParticipation()">
       <div class="col-4 icon"><i class="fas fa-star-of-david"></i></div>
       <div class="col-8 text">Participation</div>
     </div>

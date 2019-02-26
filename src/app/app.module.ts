@@ -12,12 +12,12 @@ import {AuthGuard} from './main/shared/services/auth.guard';
 import {EventsService} from './main/shared/services/events.service';
 import {AgmCoreModule} from '@agm/core';
 import {NotificationsService} from './main/shared/services/notifications.service';
-// import * as  Cloudinary from 'cloudinary-core';
-// import {CloudinaryModule, CloudinaryConfiguration} from '@cloudinary/angular';
-// import { Cloudinary } from 'cloudinary-core';
-import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
-import { Cloudinary } from 'cloudinary-core';
 import {ImageService} from './main/shared/services/image.service';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule, FirestoreSettingsToken} from '@angular/fire/firestore';
+import {EmployeeService} from './main/shared/services/employee.service';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,15 +29,57 @@ import {ImageService} from './main/shared/services/image.service';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'danielepel'}),
-    // CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'danielepel' } as CloudinaryConfiguration),
-    // CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'danielepel' } as CloudinaryConfiguration),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI',
-      libraries: ['places']
-    })
+    ToastrModule.forRoot({ positionClass: 'inline' }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
-  providers: [UserService, AuthService, AuthGuard, EventsService, NotificationsService, ImageService],
+  providers: [UserService, AuthService, AuthGuard, EventsService, NotificationsService, ImageService, EmployeeService, {
+    provide: FirestoreSettingsToken,
+    useValue: {}
+  }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

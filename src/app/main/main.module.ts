@@ -29,14 +29,23 @@ import {AgmCoreModule} from '@agm/core';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FlatpickrModule } from 'angularx-flatpickr';
-import { TestSecondaryComponent } from './test-secondary/test-secondary.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { NotificationComponent } from './notifications/notification/notification.component';
+import {FlatpickrModule} from 'angularx-flatpickr';
+import {TestSecondaryComponent} from './test-secondary/test-secondary.component';
+import {CalendarComponent} from './calendar/calendar.component';
+import {NotificationsComponent} from './notifications/notifications.component';
+import {NotificationComponent} from './notifications/notification/notification.component';
 import {FileDropModule} from 'ngx-file-drop';
 import {CloudinaryConfiguration, CloudinaryModule} from '@cloudinary/angular-5.x';
 import {Cloudinary} from 'cloudinary-core';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeeComponent} from './employees/employee/employee.component';
+import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
+import {
+  ParticipationListComponent,
+  UnsubscribeConfirmDialogComponent,
+  VoteDialogComponent
+} from './participation-list/participation-list.component';
+import {AgmDirectionModule} from 'agm-direction';
 
 @NgModule({
   declarations: [
@@ -61,7 +70,13 @@ import {Cloudinary} from 'cloudinary-core';
     CalendarComponent,
     NotificationsComponent,
     NotificationComponent,
-    UpdatePhotoComponent
+    UpdatePhotoComponent,
+    EmployeesComponent,
+    EmployeeComponent,
+    EmployeeListComponent,
+    ParticipationListComponent,
+    UnsubscribeConfirmDialogComponent,
+    VoteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -71,9 +86,6 @@ import {Cloudinary} from 'cloudinary-core';
     SharedModule,
     MaterialModule,
     MatNativeDateModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI'
-    }),
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -81,7 +93,12 @@ import {Cloudinary} from 'cloudinary-core';
     }),
     NgbModule,
     FileDropModule,
-    CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'danielepel', upload_preset: 'bkahmhvk' } as CloudinaryConfiguration),
+    CloudinaryModule.forRoot({Cloudinary}, {cloud_name: 'danielepel', upload_preset: 'bkahmhvk'} as CloudinaryConfiguration),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDIht5XWZ1k6-lVAbV9y7mGPKxyL6lkIeI',
+      libraries: ['places']
+    }),
+    AgmDirectionModule
   ],
   providers: [
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},
@@ -96,7 +113,10 @@ import {Cloudinary} from 'cloudinary-core';
     AddEventFormComponent,
     AddEventSnackComponent,
     FillProfileComponent,
-    UpdatePhotoComponent
+    UpdatePhotoComponent,
+    ParticipationListComponent,
+    UnsubscribeConfirmDialogComponent,
+    VoteDialogComponent
   ]
 })
 export class MainModule {

@@ -1,0 +1,50 @@
+<div #wrapper>
+  <mat-card class="card">
+    <div class="card__img">
+      <img src="../../../assets/icons/Group_258.png" alt="avatar">
+    </div>
+    <mat-card-content class="card__content">
+      <p>Vote for the event</p>
+      <bar-rating class="card__rating" #bar_rating [theme]="'stars'" [(rate)]="voteCount" max="5"></bar-rating>
+    </mat-card-content>
+    <mat-card-actions class="card__buttons">
+      <button mat-raised-button mat-dialog-close (click)="onNoClick()">No</button>
+      <button mat-raised-button [mat-dialog-close]="bar_rating.rate" cdkFocusInitial>Yes</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
