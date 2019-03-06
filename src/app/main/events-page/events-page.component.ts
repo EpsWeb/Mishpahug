@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./events-page.component.sass']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {
-  // TODO delete pipes except of city-pipe
   constructor(private eventsService: EventsService, public dialog: MatDialog, private router: Router) {
   }
 
@@ -68,7 +67,6 @@ export class EventsPageComponent implements OnInit, OnDestroy {
     };
 
     console.log(this.selectedPage);
-    // console.log(e);
     this.selectedPage = pageIndex;
 
     this.eventsService.getAllEventsProgressList(data, this.selectedPage)

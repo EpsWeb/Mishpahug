@@ -1,0 +1,53 @@
+<div #wrapper>
+  <mat-card class="card">
+    <div class="card__img">
+      <img src="../../../assets/icons/Group_258.png" alt="avatar">
+    </div>
+    <mat-card-content class="card__content">
+      <p>Confirmation of invitation</p>
+      <h5>
+        Do you want to invite
+      </h5>
+      <h4 class="eventName">{{data.activeProfile['fullName']}} ?</h4>
+    </mat-card-content>
+    <mat-card-actions class="card__buttons">
+      <button mat-raised-button mat-dialog-close (click)="onNoClick()">No</button>
+      <button mat-raised-button [mat-dialog-close]="data.activeProfile" cdkFocusInitial>Yes</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

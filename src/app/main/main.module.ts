@@ -46,6 +46,11 @@ import {
   VoteDialogComponent
 } from './participation-list/participation-list.component';
 import {AgmDirectionModule} from 'agm-direction';
+import { MyEventsComponent } from './my-events/my-events.component';
+import {
+  InvitationConfirmationDialogComponent,
+  MyEventInProgressComponent
+} from './my-events/my-event-in-progress/my-event-in-progress.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +81,10 @@ import {AgmDirectionModule} from 'agm-direction';
     EmployeeListComponent,
     ParticipationListComponent,
     UnsubscribeConfirmDialogComponent,
-    VoteDialogComponent
+    VoteDialogComponent,
+    MyEventsComponent,
+    MyEventInProgressComponent,
+    InvitationConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -116,7 +124,9 @@ import {AgmDirectionModule} from 'agm-direction';
     UpdatePhotoComponent,
     ParticipationListComponent,
     UnsubscribeConfirmDialogComponent,
-    VoteDialogComponent
+    VoteDialogComponent,
+    MyEventInProgressComponent,
+    InvitationConfirmationDialogComponent
   ]
 })
 export class MainModule {

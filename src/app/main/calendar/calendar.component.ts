@@ -52,6 +52,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   countOfMyEvents = 0;
   countOfSubscribedEvents = 0;
   currentMonth = new Date().getMonth() + 1;
+  currentYear = new Date().getFullYear();
 
   activeDayIsOpen = false;
 
@@ -61,11 +62,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
     console.log(this.events);
   }
 
-  fixData(month: number) {
+  fixData(month: number, year: number) {
     if (this.s1) {
       this.s1.unsubscribe();
     }
-    this.s1 = this.eventsService.getEventsForCalendar(month)
+    this.s1 = this.eventsService.getEventsForCalendar(month, year)
       .subscribe((res) => {
         console.log(res);
         this.events = [];
@@ -101,7 +102,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.fixData(this.currentMonth);
+    this.fixData(this.currentMonth, this.currentYear);
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -139,12 +140,18 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   previousMonth() {
     this.activeDayIsOpen = false;
-    this.fixData(--this.currentMonth);
+    const year = this.currentMonth === 1 ? --this.currentYear : this.currentYear;
+    this.currentMonth--;
+    const month = this.currentMonth === 0 ? 12 : this.currentMonth % 12;
+    this.fixData(month, year);
   }
 
   nextMonth() {
     this.activeDayIsOpen = false;
-    this.fixData(++this.currentMonth);
+    const year = this.currentMonth === 12 ? ++this.currentYear : this.currentYear;
+    this.currentMonth++;
+    const month = this.currentMonth === 12 ? 12 : this.currentMonth % 12;
+    this.fixData(month, year);
   }
 
   ngOnDestroy() {

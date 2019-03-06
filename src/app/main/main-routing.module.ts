@@ -11,6 +11,7 @@ import {CalendarComponent} from './calendar/calendar.component';
 import {NotificationsComponent} from './notifications/notifications.component';
 import {EmployeesComponent} from './employees/employees.component';
 import {ParticipationListComponent} from './participation-list/participation-list.component';
+import {MyEventsComponent} from './my-events/my-events.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
       {path: 'calendar', component: CalendarComponent},
       {path: 'notifications', component: NotificationsComponent},
       {path: 'employees', component: EmployeesComponent},
-      {path: 'participation', component: ParticipationListComponent}
+      {path: 'participation', component: ParticipationListComponent},
+      {path: 'my-events', component: MyEventsComponent}
     ]
   }
 ];

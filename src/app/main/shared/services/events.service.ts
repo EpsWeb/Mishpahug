@@ -57,14 +57,14 @@ export class EventsService extends BaseApi {
       );
   }
 
-  getEventsForCalendar(month: number): Observable<any> {
+  getEventsForCalendar(month: number, year: number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': <string>localStorage.getItem('token')
       })
     };
-    return this.get(`event/calendar/${month}`, httpOptions)
+    return this.get(`event/calendar/${month}/${year}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -117,6 +117,45 @@ export class EventsService extends BaseApi {
       })
     };
     return this.put(`event/vote/${eventId}/${voteCount}`, {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getMyEvents(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.get('event/currentlist', httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  inviteToEvent(eventId: number, userId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.put(`event/invitation/${eventId}/${userId}`, {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  changeStatusToPending(eventId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.put(`event/pending/${eventId}`, {}, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

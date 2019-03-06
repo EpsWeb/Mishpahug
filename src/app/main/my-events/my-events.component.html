@@ -1,0 +1,38 @@
+<div class="text-center" *ngIf="!isLoaded">Loading...</div>
+
+<div class="container" *ngIf="isLoaded">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="myEvents__tab__label">In progress</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="myEvents__inProgressPageTitle" *ngIf="eventsInProgress.length === 0">
+          ​ You don’t have any even​ts. <a [routerLink]="['/main/add-event']">Add a new ​ event</a> ​ to invite other
+          people
+        </div>
+
+        <max-my-event-in-progress *ngFor="let eventInProgress of eventsInProgress" [eventInProgress]="eventInProgress"
+        (becomeToStatusPending)="becomeToStatusPending()"
+        ></max-my-event-in-progress>
+
+
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="myEvents__tab__label">Pending</span>
+      </ng-template>
+      Content 2
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="myEvents__tab__label">Done</span>
+      </ng-template>
+
+      Content 3
+    </mat-tab>
+  </mat-tab-group>
+</div>

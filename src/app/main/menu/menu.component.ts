@@ -82,6 +82,11 @@ export class MenuComponent implements OnInit {
     this.closeMenu.emit();
   }
 
+  goToMyEvents() {
+    this.router.navigate(['main/my-events']);
+    this.closeMenu.emit();
+  }
+
 }
 
 
