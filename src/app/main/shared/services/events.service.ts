@@ -37,7 +37,6 @@ export class EventsService extends BaseApi {
         'Authorization': <string>localStorage.getItem('token')
       })
     };
-    // return this.post('data', data)
     return this.post('event/creation', data, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -156,6 +155,19 @@ export class EventsService extends BaseApi {
       })
     };
     return this.put(`event/pending/${eventId}`, {}, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getMyEventsHistory(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.get('event/historylist', httpOptions)
       .pipe(
         catchError(this.handleError)
       );

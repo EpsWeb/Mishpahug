@@ -51,6 +51,8 @@ import {
   InvitationConfirmationDialogComponent,
   MyEventInProgressComponent
 } from './my-events/my-event-in-progress/my-event-in-progress.component';
+import { MyEventPendingComponent } from './my-events/my-event-pending/my-event-pending.component';
+import { MyEventDoneComponent } from './my-events/my-event-done/my-event-done.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import {
     VoteDialogComponent,
     MyEventsComponent,
     MyEventInProgressComponent,
-    InvitationConfirmationDialogComponent
+    InvitationConfirmationDialogComponent,
+    MyEventPendingComponent,
+    MyEventDoneComponent
   ],
   imports: [
     CommonModule,

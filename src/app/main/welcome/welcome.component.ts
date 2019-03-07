@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -6,12 +6,9 @@ import {Router} from '@angular/router';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.sass']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
 
   constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
 
   goToEvents() {
     this.router.navigate(['main/events']);

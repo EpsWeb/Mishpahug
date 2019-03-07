@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {EventsService} from '../shared/services/events.service';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute, Params} from '@angular/router';
+import {combineLatest, Subscription} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 export interface MyEvent {
   eventId: number;
@@ -24,7 +24,7 @@ export interface MyEvent {
 })
 export class MyEventsComponent implements OnInit, OnDestroy {
 
-  constructor(private eventsService: EventsService) {
+  constructor(private eventsService: EventsService, private router: Router) {
   }
 
   eventsInProgress: MyEvent[];
@@ -35,17 +35,20 @@ export class MyEventsComponent implements OnInit, OnDestroy {
   isLoaded = false;
 
   ngOnInit() {
-    this.s1 = this.eventsService.getMyEvents()
-      .subscribe((res) => {
-        console.log(res);
-        this.eventsInProgress = res['events'].filter((event) => event['status'].toLowerCase() === 'in progress');
-        this.eventsPending = res['events'].filter((event) => event['status'].toLowerCase() === 'pending');
-        this.eventsDone = res['events'].filter((event) => event['status'].toLowerCase() === 'done');
-        this.isLoaded = true;
-        console.log(this.eventsInProgress, this.eventsPending, this.eventsDone);
-      }, (err) => {
-        console.log(err);
-      });
+
+    this.s1 = combineLatest([
+      this.eventsService.getMyEvents(),
+      this.eventsService.getMyEventsHistory()
+    ]).subscribe((data: [any[], any[]]) => {
+      this.eventsInProgress = data[0]['events'].filter((event) => event['status'].toLowerCase() === 'in progress');
+      this.eventsPending = data[0]['events'].filter((event) => event['status'].toLowerCase() === 'pending');
+      this.eventsDone = data[1]['events'];
+      this.isLoaded = true;
+      console.log(this.eventsInProgress, this.eventsPending, this.eventsDone);
+    }, (err) => {
+      console.log(err);
+      this.router.navigate(['/main/welcome']);
+    });
   }
 
   becomeToStatusPending() {

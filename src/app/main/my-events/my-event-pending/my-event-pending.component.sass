@@ -3,7 +3,7 @@
     color: white
     font-weight: bold
     font-size: 1rem
-  &__inProgressPageTitle, &__pendingPageTitle
+  &__inProgressPageTitle
     margin-top: 1rem
     text-align: center
     font-weight: bold
@@ -16,11 +16,32 @@
       border-radius: 5px
       width: 100%
       margin-top: 2rem
+      &__escape
+        position: absolute
+        right: 0
+        top: 1rem
+        background-color: #7A43B6
+        line-height: 2rem
+        height: 2rem
+        width: 2rem
+        border-radius: 50%
+        color: white
+        text-align: center
+        cursor: pointer
+        box-shadow: 1px 2px 10px black
+        span
+          position: relative
+          top: 0.2rem
+          font-size: 0.7rem
       &__desc
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
+        i
+          position: relative
+          top: 0.45rem
+          right: 0.2rem
         p
           margin-bottom: 0.5rem
         h5
@@ -30,8 +51,8 @@
           text-decoration: underline
           font-size: 0.85rem
           font-weight: bold
-          span.value
-            font-weight: normal
+        span.value
+          font-weight: normal
         button
           font-weight: bold
           color: white
@@ -59,6 +80,11 @@
         button[disabled]
           background-color: rgba(122, 67, 182, 0.4)
       &__bottom
+        button
+          margin-top: 0.5rem
+          font-weight: bold
+          color: white
+          background-color: #7A43B6
         h5
           text-align: center
           font-weight: bold
@@ -66,13 +92,22 @@
           border: 2px solid black
           border-radius: 5px
           &__item
+            position: relative
             width: 100%
             padding: 5px 10px
             height: 50px
             border-bottom: 1px solid grey
+            i
+              display: none
             &.active
               background-color: rgba(63, 170, 60, 0.45) !important
               span
+                color: rgb(63, 170, 60)
+              i
+                display: inline
+                position: absolute
+                right: 0.5rem
+                top: 0.3rem
                 color: rgb(63, 170, 60)
             &:hover
               cursor: pointer
@@ -101,3 +136,5 @@ mat-panel-description
 
 mat-icon
   margin: 0 3px
+.red-snackbar
+  color: red

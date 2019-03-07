@@ -1,0 +1,81 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (closed)="activeProfile = ''; invitedAreShown = false; buttonShowInvitedText = 'Show invited people'">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5 style="font-weight: bold;">{{ eventPending.title }}</h5>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>today</mat-icon>
+        {{ eventPending.date }}
+        <mat-icon>access_time</mat-icon>
+        {{ eventPending.time }}
+      </mat-panel-description>
+
+      <ng-template matExpansionPanelContent>
+
+        <div class="row myEvents__description">
+          <div class="col-md-6">
+            <div class="myEvents__description__left__top">
+              <h5>{{ eventPending.description }}</h5>
+              <p>Will go {{ eventPending['participants'].length }} people
+                <button mat-raised-button [disabled]="eventPending['participants'].length === 0"
+                        (click)="toggleShowingSubscribers()">{{ buttonShowInvitedText }}
+                </button>
+              </p>
+            </div>
+            <div class="myEvents__description__left__bottom">
+              <div class="row">
+                <div class="col-md-8 offset-md-2" *ngIf="invitedAreShown">
+                  <h5>Invited</h5>
+                  <div class="myEvents__description__left__bottom__list">
+                    <div class="myEvents__description__left__bottom__list__item"
+                         *ngFor="let subscriber of eventPending['participants']"
+                         (click)="showPhoto($event, subscriber)" [id]="subscriber.userId">
+                      <img [src]="subscriber['pictureLink'][1]" alt="avatar">
+                      <span>{{ subscriber['fullName'] }}</span>
+                      <i class="material-icons">done</i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="activeProfile">
+            <div class="myEvents__description__right" *ngIf="photoIsShown">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="myEvents__description__right__img">
+                    <img [src]="activeProfile['pictureLink'][1]" alt="avatar">
+                    <bar-rating [theme]="'stars'" [rate]="activeProfile.rate"
+                                max="5"></bar-rating>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="myEvents__description__right__desc">
+                    <h5>{{ activeProfile['fullName'] }}</h5>
+                    <p><i class="material-icons">phone</i> <span>{{ activeProfile['phoneNumber'] }}</span></p>
+                    <p><span class="name">Confession: </span><span
+                      class="value">{{ activeProfile['confession'] }}</span></p>
+                    <p><span class="name">Gender: </span><span class="value">{{ activeProfile['gender'] }}</span></p>
+                    <p><span class="name">Marital status: </span><span class="value">{{ activeProfile['maritalStatus'] }}</span>
+                    </p>
+                    <p><span class="name">Food preferences: </span><span class="value">{{ activeProfile['foodPreferences'] }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="myEvents__description__right__escape" (click)="cancelShowingPhoto()">
+                <span><i class="material-icons">close</i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </ng-template>
+    </mat-expansion-panel-header>
+
+  </mat-expansion-panel>
+</mat-accordion>

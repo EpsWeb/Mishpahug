@@ -37,7 +37,7 @@ export class EventsPageComponent implements OnInit, OnDestroy {
 
   countEvents = 100;
   selectedPage = '0';
-  selectedRadius = 2000;
+  selectedRadius = 200000;
 
   selectedDateFromFormatForDB = '';
   selectedDateFromFormatForPipe = '';
@@ -172,7 +172,7 @@ export class DialogComponent implements OnInit {
       holiday: new FormControl(''),
       confession: new FormControl(''),
       food: new FormControl(''),
-      radius: new FormControl(2000, [Validators.required])
+      radius: new FormControl(200000, [Validators.required])
     });
   }
 

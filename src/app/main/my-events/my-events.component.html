@@ -24,7 +24,18 @@
       <ng-template mat-tab-label>
         <span class="myEvents__tab__label">Pending</span>
       </ng-template>
-      Content 2
+
+      <ng-template matTabContent>
+        <div class="myEvents__pendingPageTitle" *ngIf="eventsPending.length === 0">
+          ​ You don’t have any even​ts. <a [routerLink]="['/main/add-event']">Add a new ​ event</a> ​ to invite other
+          people
+        </div>
+
+        <max-my-event-pending *ngFor="let eventPending of eventsPending" [eventPending]="eventPending"></max-my-event-pending>
+
+
+      </ng-template>
+
     </mat-tab>
 
     <mat-tab>
@@ -32,7 +43,17 @@
         <span class="myEvents__tab__label">Done</span>
       </ng-template>
 
-      Content 3
+      <ng-template matTabContent>
+        <div class="myEvents__pendingPageTitle" *ngIf="eventsPending.length === 0">
+          ​ You don’t have any even​ts. <a [routerLink]="['/main/add-event']">Add a new ​ event</a> ​ to invite other
+          people
+        </div>
+
+        <max-my-event-done *ngFor="let eventDone of eventsDone" [eventDone]="eventDone"></max-my-event-done>
+
+
+      </ng-template>
+
     </mat-tab>
   </mat-tab-group>
 </div>
