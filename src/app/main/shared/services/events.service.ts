@@ -2,7 +2,6 @@ import {BaseApi} from '../core/base-api';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {MishEvent} from '../models/event.model';
 import {catchError} from 'rxjs/operators';
 
 @Injectable()
@@ -77,6 +76,19 @@ export class EventsService extends BaseApi {
       })
     };
     return this.get(`event/own/${eventId}`, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getSubscribedEventInfo(eventId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': <string>localStorage.getItem('token')
+      })
+    };
+    return this.get(`event/subscribed/${eventId}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

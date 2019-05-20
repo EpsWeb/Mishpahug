@@ -1,11 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {addMinutes, isSameDay, isSameMonth} from 'date-fns';
-import {Subject, Subscription, throwError} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {EventsService} from '../shared/services/events.service';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
 import {AdditionalDataForCalendarEvent} from '../shared/models/additionalDataForCalendarEvent.model';
 
 const colors: any = {
@@ -45,6 +43,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   };
 
   isLoaded = false;
+  isLoadedMyEvents = false;
+  isLoadedSubscribedEvents = false;
 
   refresh: Subject<any> = new Subject();
 
@@ -59,7 +59,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
   s1: Subscription;
 
   constructor(private modal: NgbModal, private eventsService: EventsService) {
-    console.log(this.events);
   }
 
   fixData(month: number, year: number) {
@@ -74,35 +73,66 @@ export class CalendarComponent implements OnInit, OnDestroy {
           const start = new Date(e.date + ' ' + e.time);
           const end = addMinutes(new Date(e.date + ' ' + e.time), e.duration);
           const color = colors.yellow;
-          const ev: CalendarEvent = {
-            start: start,
-            end: end,
-            title: e.title,
-            color: color
-          };
-          this.events.push(ev);
+          this.eventsService.getMyEventInfo(e['eventId'])
+            .subscribe((eventInfo) => {
+              const ev: CalendarEvent<AdditionalDataForCalendarEvent> = {
+                start: start,
+                end: end,
+                title: e.title,
+                color: color,
+                meta: {
+                  holiday: eventInfo.holiday,
+                  city: eventInfo.city,
+                  duration: eventInfo.duration,
+                  description: eventInfo.description,
+                  rate: eventInfo.rate,
+                  numberOfVoters: eventInfo.numberOfVoters,
+                  picture: eventInfo.picture
+                }
+              };
+              this.events.push(ev);
+              this.isLoadedMyEvents = true;
+            }, (err) => {
+              console.log(err);
+            });
         });
         res['subscribedEvents'].map((e) => {
           const start = new Date(e.date + ' ' + e.time);
           const end = addMinutes(new Date(e.date + ' ' + e.time), e.duration);
           const color = colors.blue;
-          const ev: CalendarEvent = {
-            start: start,
-            end: end,
-            title: e.title,
-            color: color
-          };
-          this.events.push(ev);
+          this.eventsService.getSubscribedEventInfo(e['eventId'])
+            .subscribe((eventInfo) => {
+              const ev: CalendarEvent<AdditionalDataForCalendarEvent> = {
+                start: start,
+                end: end,
+                title: e.title,
+                color: color,
+                meta: {
+                  holiday: eventInfo.holiday,
+                  city: eventInfo.city,
+                  duration: eventInfo.duration,
+                  description: eventInfo.description,
+                  rate: eventInfo.rate,
+                  numberOfVoters: eventInfo.numberOfVoters,
+                  picture: eventInfo.picture
+                }
+              };
+              this.events.push(ev);
+              this.isLoadedSubscribedEvents = true;
+            }, (err) => {
+              console.log(err);
+            });
         });
         console.log(res['myEvents'].length);
         this.countOfMyEvents = res['myEvents'].length;
         this.countOfSubscribedEvents = res['subscribedEvents'].length;
-        this.isLoaded = true;
       });
+    this.isLoaded = true;
   }
 
   ngOnInit() {
     this.fixData(this.currentMonth, this.currentYear);
+    console.log(this.events);
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {

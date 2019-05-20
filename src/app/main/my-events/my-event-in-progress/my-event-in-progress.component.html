@@ -32,6 +32,7 @@
                   <div class="myEvents__description__left__bottom__list">
                     <div class="myEvents__description__left__bottom__list__item"
                          *ngFor="let subscriber of eventInProgress['participants']"
+                         [ngClass]="{'active': subscriber.isInvited}"
                          (click)="showPhoto($event, subscriber)" [id]="subscriber.userId">
                       <img [src]="subscriber['pictureLink'][1]" alt="avatar">
                       <span>{{ subscriber['fullName'] }}</span>

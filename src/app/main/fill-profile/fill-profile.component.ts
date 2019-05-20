@@ -136,6 +136,7 @@ export class FillProfileComponent implements OnInit {
           // TODO Invalid data
         }
       });
+    // this.ngOnInit();
   }
 }
 

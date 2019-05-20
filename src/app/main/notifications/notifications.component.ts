@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Subscription, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Subscription} from 'rxjs';
 import {NotificationsService} from '../shared/services/notifications.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   notifications;
 
   s1: Subscription;
+  isLoaded = false;
 
   ngOnInit() {
 
@@ -23,6 +24,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         console.log(res);
         this.notifications = res['notifications'];
+        this.isLoaded = true;
       }, (err) => {
         console.log(err);
       });
